@@ -1,0 +1,174 @@
+@import "helper.scss";
+
+.a11y_search_field {
+    display: block;
+    width: 100%;
+    text-align: center;
+
+    .a11y_input_wrapper {
+        position: relative;
+
+        input {
+            border: 1px solid #c8c8c8;
+            padding-right: 40px;
+            border-radius: 3px;
+            color: #000;
+            font-weight: normal;
+            font-size: 1rem;
+            -webkit-transition: all 0.2s linear;
+            -moz-transition: all 0.2s linear;
+            transition: all 0.2s linear;
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+            z-index: 0;
+
+            &:focus {
+                color: #000;
+                border: 2px solid #005499;
+                outline: none;
+            }
+        }
+
+        .icon_magnifying_glass {
+            position: absolute;
+            width: 40px !important;
+            height: 22px;
+            top: 8px;
+            left: 0;
+            font-weight: 300;
+            line-height: 0;
+            color: #ccc;
+        }
+
+        .suggestionbox_clear_btn {
+            position: absolute;
+            width: 34px !important;
+            height: 34px !important;
+            border-radius: 3px;
+            padding: 0;
+            background-color: #fff;
+            font-size: 1.3rem;
+            top: 2px;
+            right: 1px;
+            line-height: 0;
+            color: #ccc;
+            z-index: 0;
+
+            &:hover,
+            &:focus {
+                font-weight: 800 !important;
+                color: #333;
+            }
+        }
+
+        .autocomplete-suggestions {
+            border: 1px solid #c8c8c8;
+            border-radius: 3px;
+            background: #fff;
+            cursor: default;
+            overflow: auto;
+            height: auto;
+            display: none;
+            position: absolute;
+            z-index: 1;
+            white-space: normal;
+            line-height: 1.15;
+            width: 100%;
+            text-align: left;
+        }
+
+        .autocomplete-suggestion {
+            padding: 5px 10px;
+            overflow: hidden;
+        }
+
+        .autocomplete-selected {
+            background: #f0f0f0;
+        }
+
+        .autocomplete-suggestions strong {
+            font-weight: normal;
+            color: #3399ff;
+        }
+
+        .autocompleteList {
+            margin: 0px;
+            padding-left: 0px;
+
+            li,
+            div {
+                list-style-type: none;
+                border-bottom: 1px solid #ccc;
+                font-weight: normal;
+            }
+
+            li {
+                &:hover,
+                &.highligt {
+                    background: #e8eef3;
+                    color: #125687;
+                    cursor: pointer;
+                    font-weight: normal;
+                }
+            }
+
+            div {
+                &:hover,
+                &.highligt {
+                    background: #e8eef3;
+                    color: #125687;
+                    cursor: pointer;
+                    font-weight: normal;
+                }
+            }
+
+            li {
+                &:focus,
+                &.highligt:focus {
+                    border: 1px solid #000;
+                }
+            }
+
+            div {
+                &:focus,
+                &.highligt:focus {
+                    border: 1px solid #000;
+                }
+            }
+        }
+    }
+}
+
+.visually-hidden {
+    position: absolute !important;
+    clip: rect(1px 1px 1px 1px);
+
+    /* IE6, IE7 */
+    clip: rect(1px, 1px, 1px, 1px);
+    padding: 0 !important;
+    border: 0 !important;
+    height: 1px !important;
+    width: 1px !important;
+    overflow: hidden;
+}
+
+body:hover .visually-hidden {
+    a,
+    input,
+    button {
+        display: none !important;
+    }
+}
+
+.button {
+    cursor: pointer;
+}
+
+.info {
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+}

@@ -1,0 +1,423 @@
+.fund_finder_wrapper {
+    position: relative;
+    background-color: transparent;
+    min-height: 50px;
+    padding: 50px 0;
+}
+
+.fund_finder_heading {
+    text-align: center;
+}
+
+.ffr-fund-name {
+    /* <H3> */
+    font-weight: 600;
+    font-size: 1.5rem;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+}
+
+.fund_finder_input_wrapper {
+    position: relative;
+}
+
+.fund_finder_search_input {
+    /* padding-left: 40px; */
+    padding-right: 40px;
+}
+
+.fund_finder_input_wrapper .icon_magnifying_glass {
+    position: absolute;
+    width: 40px !important;
+    height: 22px;
+    top: 8px;
+    left: 0;
+    font-weight: 300;
+    line-height: 0;
+    color: #ccc;
+}
+
+.btn_reset_fund_finder_input {
+    position: absolute;
+    width: 34px !important;
+    height: 34px !important;
+    border-radius: 3px;
+    padding: 0;
+    background-color: #fff;
+    font-size: 1.3rem;
+    top: 2px;
+    right: 1px;
+    line-height: 0;
+    color: #ccc;
+    z-index: 0;
+}
+
+.btn_reset_fund_finder_input:hover,
+.btn_reset_fund_finder_input:focus {
+    font-weight: 800 !important;
+    color: #333;
+}
+
+.fund_finder_form_results .fund_finder_result_list {
+    display: inline-block;
+    width: 100%;
+    background-color: #fff;
+    padding: 5px;
+}
+
+.fund_finder_form_results .fund_finder_result_list .fund_finder_form_item {
+    padding: 0 10px;
+}
+
+.fund_finder_form_results .fund_finder_result_list .fund_finder_form_item a {
+    width: inherit;
+}
+
+.fund_finder_form_results .fund_finder_result_list .fund_finder_form_item:hover * {
+    background-color: #125687;
+    color: #fff !important;
+}
+
+.fund_finder_form_results .fund_finder_result_list .fund_finder_form_item:focus {
+    text-decoration: none !important;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25) !important;
+}
+
+.fund_finder_form_results .fund_finder_fund_name {
+    margin-right: auto !important;
+}
+
+#fundFinderFundDetails {
+    white-space: nowrap;
+}
+
+#fundFinderFundDetails label,
+#fundFinderFundDetails select {
+    display: inline-block;
+}
+
+#fundFinderFundDetails select {
+    width: auto;
+    min-width: 3.2rem;
+}
+
+@media screen and (max-width: 500px) {
+    .fund_finder_form_results {
+        font-size: 0.9rem;
+    }
+
+    .fund_finder_form_results .fund_finder_result_list .fund_finder_form_item {
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    .fund_finder_form_results .fund_finder_fund_name {
+        margin-right: unset !important;
+        padding-right: 1ex !important;
+    }
+
+    .fund_finder_form_results .fund_finder_series {
+        min-width: auto;
+        margin-right: 1ex;
+    }
+
+    .fund_finder_form_results .fund_finder_currency {
+        min-width: auto;
+    }
+}
+
+.fund_finder_fund_details_wrapper {
+    margin-top: 3rem;
+    background-color: #f7f7f7;
+    padding: 30px 30px 0 30px;
+    border: 1px solid #ccc;
+    z-index: 0;
+}
+
+#ffrPrice {
+    position: relative;
+    padding-left: 1rem;
+    font-size: 1.8rem;
+    font-weight: 800;
+}
+
+body:not(.fr) #ffrPrice::before {
+    position: absolute;
+    margin-left: -1rem;
+    width: 0.85rem;
+    content: "$";
+}
+
+.fr #ffrPrice {
+    margin-left: -1rem;
+    padding-left: 15px;
+    padding-right: 1rem;
+}
+
+.fr #ffrPrice .price::after {
+    width: 1.2rem;
+    content: " $";
+    position: absolute;
+    text-align: revert;
+    top: 0.3rem;
+    padding-left: 0.5rem;
+}
+
+#ffrPrice::before,
+#ffrPrice .price::after {
+    font-size: 70%;
+}
+
+#ffrPrice .currency {
+    font-size: 60%;
+    font-weight: 400;
+    color: #333;
+}
+
+.fr #ffrPrice .currency {
+    padding-left: 1.2rem;
+    display: inline-block;
+    vertical-align: top;
+    padding-top: 0.5rem;
+}
+
+.fund_finder_wrapper .unit_percent::after {
+    display: inline;
+    font-size: 0.6rem;
+    content: "%";
+}
+
+.fr .fund_finder_wrapper .unit_percent::after {
+    content: " %";
+}
+
+.autocompleteList {
+    margin: 0px;
+    padding-left: 0px;
+}
+
+.autocompleteList li,
+.autocompleteList div {
+    list-style-type: none;
+    border-bottom: 1px solid #ccc;
+    font-weight: normal;
+}
+
+.autocompleteList li:hover,
+.autocompleteList li.highligt,
+.autocompleteList div:hover,
+.autocompleteList div.highligt {
+    background: #e8eef3;
+    color: #125687;
+    cursor: pointer;
+    font-weight: normal;
+}
+
+.autocompleteList li:focus,
+.autocompleteList li.highligt:focus,
+.autocompleteList div:focus,
+.autocompleteList div.highligt:focus {
+    border: 1px solid #000;
+}
+
+#fundFinderSearchfield {
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+#fundFinderSearchfield form {
+    display: block;
+    padding: 0 0 2px;
+    border-radius: 3px;
+    margin: 5px 0 0;
+    padding: 0 9px 1px;
+    width: 100%;
+}
+
+#fundFinderSearchfield form input {
+    border: 1px solid #c8c8c8;
+    border-radius: 3px;
+    color: #000;
+    font-weight: normal;
+    font-size: 1rem;
+    -webkit-transition: all 0.2s linear;
+    -moz-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    z-index: 0;
+}
+
+#fundFinderSearchfield form input:focus {
+    color: #000;
+    border: 2px solid #005499;
+    outline: none;
+}
+
+.autocomplete-suggestions {
+    border: 1px solid #c8c8c8;
+    border-radius: 3px;
+    background: #fff;
+    cursor: default;
+    overflow: auto;
+    height: auto;
+    display: none;
+    position: absolute;
+    z-index: 1;
+    white-space: normal;
+    line-height: 1.15;
+    width: 100%;
+    text-align: left;
+}
+
+.autocomplete-suggestion {
+    padding: 5px 10px;
+    overflow: hidden;
+}
+
+.autocomplete-selected {
+    background: #f0f0f0;
+}
+
+.autocomplete-suggestions strong {
+    font-weight: normal;
+    color: #3399ff;
+}
+
+.visually-hidden {
+    position: absolute !important;
+    clip: rect(1px 1px 1px 1px);
+    /* IE6, IE7 */
+    clip: rect(1px, 1px, 1px, 1px);
+    padding: 0 !important;
+    border: 0 !important;
+    height: 1px !important;
+    width: 1px !important;
+    overflow: hidden;
+}
+
+body:hover .visually-hidden a,
+body:hover .visually-hidden input,
+body:hover .visually-hidden button {
+    display: none !important;
+}
+
+#hint {
+    position: absolute;
+    left: 777px;
+    z-index: 10;
+    background-color: #fff;
+    text-transform: capitalize;
+}
+
+#fundFinderSearchInput {
+    z-index: 11;
+    background-color: #fff;
+    position: relative;
+    text-transform: capitalize;
+}
+
+.button {
+    cursor: pointer;
+}
+
+.info {
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+}
+
+#fundFinderFundDetails .form-group {
+    margin-bottom: 0;
+}
+
+#fundFinderFundDetails select {
+    margin-top: 0;
+}
+
+.returns_wrapper {
+    margin-bottom: 25px;
+    /* bottom should be aligned with chart's x-axes on tablet/desktop */
+    border-bottom: 1px solid #ccc;
+}
+
+.actions_wrapper {
+    margin: 0 -30px 0 -30px;
+    padding: 0;
+    background-color: #ccc;
+}
+
+#fundFinderBtnFundFact::before {
+    content: "\f316";
+}
+
+#btnFundCode::before {
+    content: "\f5fc";
+}
+
+#fundFinderBtnAdditionalInfo::before {
+    content: "\f05a";
+}
+
+#fundFinderBtnFundProfile:hover,
+#fundFinderBtnFundFact:hover,
+#btnFundCode:hover,
+#fundFinderBtnAdditionalInfo:hover {
+    background-color: #d5f7ff !important;
+}
+
+.no_returns_message {
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ccc;
+    padding: 15px;
+    background-color: #fff;
+    font-weight: 400;
+}
+
+.no_returns_message p {
+    margin-bottom: 0;
+}
+
+@media screen and (max-width: 500px) {
+    .fund_finder_search_input,
+    .autocomplete-suggestions *,
+    #fundFinderBtnFundProfile,
+    #fundFinderBtnFundFact,
+    #btnFundCode,
+    #fundFinderBtnAdditionalInfo {
+        font-family: "Gotham XNarrow SSm A", "Gotham XNarrow SSm B";
+    }
+
+    #fundFinderBtnFundProfile::before,
+    #fundFinderBtnFundFact::before,
+    #btnFundCode::before,
+    #fundFinderBtnAdditionalInfo::before {
+        display: none;
+        padding: 10px 5px !important;
+    }
+
+    .ffr-fund-name {
+        /* <H3> */
+        font-family: "Gotham XNarrow SSm A", "Gotham XNarrow SSm B";
+        font-size: 1.4rem;
+    }
+
+    .fund_finder_fund_details_wrapper {
+        padding: 15px 15px 0 15px;
+    }
+
+    .actions_wrapper {
+        margin: 0 -15px 0 -15px;
+    }
+
+    .returns_wrapper {
+        margin-bottom: 35px;
+    }
+}

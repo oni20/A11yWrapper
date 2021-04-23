@@ -1,0 +1,283 @@
+@import "helper.scss";
+
+.carousel {
+    position: relative;
+    margin-bottom: em(20px);
+}
+
+.carousel-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.carousel ul {
+    margin: 0;
+    padding: 0;
+}
+
+.slide {
+    top: 0;
+    background-size: cover;
+    width: 100%;
+
+    .slide-title {
+        display: inline-block;
+        font-size: 1.25em;
+        margin: 0;
+        padding: 0.25em;
+        text-align: right;
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 0 0 0 0.5em;
+    }
+
+    a {
+        display: block;
+        text-align: right;
+    }
+}
+
+/* Animation 
+  ========================*/
+
+/* FADE */
+
+.fade {
+    .current {
+        -webkit-animation-fill-mode: both;
+        animation-fill-mode: both;
+        -webkit-animation-name: fadeIn;
+        animation-name: fadeIn;
+        display: block;
+    }
+
+    .slide {
+        transition: auto;
+    }
+}
+
+@include keyframes(fadeIn) {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.next.in-transition,
+.prev.in-transition {
+    visibility: visible;
+}
+
+/* RIGHT TO LEFT */
+.slide {
+    display: none;
+    visibility: hidden;
+    transition: left 0.6s ease-out;
+}
+
+.current {
+    display: block;
+    visibility: visible;
+    left: 0;
+}
+
+.next {
+    left: 100%;
+}
+
+.prev {
+    left: -100%;
+}
+
+/* LEFT TO RIGHT */
+.ltr {
+    .slide {
+        transition: right 0.6s ease-out;
+    }
+
+    .current {
+        visibility: visible;
+        right: 0;
+        left: auto;
+    }
+
+    .next {
+        right: 100%;
+        left: auto;
+    }
+
+    .prev {
+        right: -100%;
+        left: auto;
+    }
+}
+
+.fade:not(.show) {
+    opacity: inherit;
+}
+
+/* Animation end
+  ================== */
+
+.btn-prev {
+    position: absolute;
+    top: 45%;
+    margin-top: -2.5em;
+    border: 0;
+    background: rgba(255, 255, 255, 0.6);
+    line-height: 1;
+    padding: em(10px) em(5px);
+    transition: padding 0.4s ease-out;
+}
+
+.btn-next {
+    position: absolute;
+    top: 45%;
+    margin-top: -2.5em;
+    border: 0;
+    background: rgba(255, 255, 255, 0.6);
+    line-height: 1;
+    padding: em(10px) em(5px);
+    transition: padding 0.4s ease-out;
+
+    &:hover,
+    &:focus {
+        padding-left: em(15px);
+        padding-right: em(15px);
+    }
+}
+
+.btn-prev {
+    &:hover,
+    &:focus {
+        padding-left: em(15px);
+        padding-right: em(15px);
+    }
+
+    left: 0%;
+    border-radius: 0 0.25em 0.25em 0;
+}
+
+.btn-next {
+    right: 0%;
+    border-radius: 0.25em 0 0 0.25em;
+}
+
+.carousel.with-slidenav {
+    padding-bottom: 2em;
+    background-color: #fff;
+}
+
+.slidenav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+[data-animationbtn="yes"] {
+    line-height: 1em;
+    height: 1.5em !important;
+    width: 1.5em !important;
+    font-weight: bold;
+    color: #fff;
+    background-color: #0a6fb3 !important;
+    opacity: 1;
+}
+
+[data-mobilesidenavleft="yes"],
+[data-mobilesidenavright="yes"] {
+    display: none !important;
+}
+
+[data-mobilesidenavleft="yes"]::before {
+    content: "<";
+}
+
+[data-mobilesidenavright="yes"]::before {
+    content: ">";
+}
+
+.slidenav button {
+    border: none;
+    cursor: pointer;
+    height: em(11px);
+    width: em(11px);
+    margin: 0 8px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+
+    &.current {
+        opacity: 1;
+        height: em(15px);
+        width: em(15px);
+        background-color: #0a6fb3;
+    }
+
+    &:hover {
+        background-color: #0a6fb3;
+    }
+}
+
+.visuallyhidden {
+    position: absolute !important;
+    width: em(1px) !important;
+    height: em(1px) !important;
+    padding: 0 !important;
+    margin: em(-1px) !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+@media only screen and (max-width: em(767px)) {
+    /* For mobile phones: */
+
+    .btn-prev,
+    .btn-next {
+        display: none;
+    }
+
+    [data-mobilesidenav="no"] {
+        display: none !important;
+    }
+
+    [data-mobilesidenavleft="yes"],
+    [data-mobilesidenavright="yes"] {
+        display: block !important;
+    }
+
+    [data-slide="*"] {
+        display: none !important;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: em(768px)) {
+    .btn-prev,
+    .btn-next {
+        top: 35%;
+    }
+}
+
+/* Larger devices (laptop, 1024px and up) */
+@media only screen and (min-width: em(1024px)) {
+    .btn-prev,
+    .btn-next {
+        top: 40%;
+    }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: em(1200px)) {
+    .btn-prev,
+    .btn-next {
+        top: 40%;
+    }
+}

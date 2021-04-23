@@ -1,2 +1,2 @@
-# A11yWrapper
-A JavaScript based library with list of components supporting accessibility
+# carousel-js
+Accessible carousel library purely built on JavaScript
