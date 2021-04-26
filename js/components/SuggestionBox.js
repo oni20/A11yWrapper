@@ -344,15 +344,12 @@ A11ySuggestionBox.prototype.applySearch = function (suggestedVal) {
     if (results.length > 0) {
       // Start things fresh by removing the suggestions div and emptying the live region before we start			
       context.autocompleteList.parentElement.style.display = 'block';
-
-      // Add suggestions to the list,
-      // if isNumber true then it means, result is coming from Fund code and Fund name key is present inside result object
-      // thereby, access name by the keyname
+      
       for (let i = 0; i < results.length; i++) {
         if (i < context.noOfItems) {
           var dataSetbyHooks = " ";
 
-          if (context.dataCanvas.hooks && context.dataCanvas.hooks.length > 0) {
+          if (context.dataCanvas.hooks && context.dataCanvas.hooks.length > 0 && keyName !== 'DisplayText') {
             context.dataCanvas.hooks.map(hook => {
               if (results[i][hook] === undefined) {
                 context.Utility._error('"' + hook + '" name is not a valid key in the object. Please check the hook name passed in Configuration object');

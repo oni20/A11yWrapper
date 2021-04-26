@@ -1,5 +1,6 @@
 import A11yCarousel from "./components/Carousel";
 import A11ySuggestionBox from "./components/SuggestionBox";
+import A11ySlider from "./components/Slider";
 
 // Plugin Configuration
 var _A11yWrapper = function (selector) {
@@ -9,7 +10,7 @@ var _A11yWrapper = function (selector) {
 
 _A11yWrapper.prototype = {
     carousal: function (...settings) {
-        this.node.forEach(function (node, index) {
+        this.node.forEach((node, index) => {
             return new A11yCarousel(
                 node,
                 settings[index] === undefined ? settings[0] : settings[index]
@@ -18,6 +19,15 @@ _A11yWrapper.prototype = {
     },
     autosuggestion: function (settings) {
         return new A11ySuggestionBox(this.node[0], settings);
+    },
+    slider: function (...settings) {
+        this.node.forEach((node, index) => {
+            return new A11ySlider(
+                node,
+                settings[index] === undefined ? settings[0] : settings[index],
+                index
+            );
+        });
     },
 };
 
