@@ -1,0 +1,52 @@
+@import "helper.scss";
+
+$blue: #6d62f9;
+
+.aria-widget-slider {
+    display: flex;
+    flex-direction: column;
+
+    .label {
+        margin-bottom: 1.5em;
+    }
+
+    .rail {
+        width: em(300px);
+        margin: em(2px);
+        padding: em(4px);
+        border-radius: em(10px);
+        background-color: #ebebeb;
+        position: inherit;
+        top: 2em;
+        height: em(4px);
+
+        .thumb {
+            border-radius: 50%;
+            background-color: $blue;
+            position: relative;
+            box-shadow: 0 2px 5px 0 #000000ab;
+
+            &:focus {
+                outline: 0;
+                box-shadow: 0px 0px 6px 9px #6d62f942;
+            }
+
+            &.focus,
+            &:hover {
+                cursor: pointer;
+                background-color: $blue;
+            }
+        }
+
+        &.focus {
+            background-color: #aaa;
+            outline: 0;
+        }
+    }
+
+    .value {
+        width: 2em;
+        text-align: right;
+        position: absolute;
+    }
+}
