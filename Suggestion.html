@@ -43,7 +43,7 @@
     <script src="dist/js/A11yWrapper.min.js" type="text/javascript"></script>
 
     <script type="text/javascript">
-        var plainArr = ['Apple', 'Mango', 'Argentina', 'Monkey', 'Bellisimo', 'Ball', 'Cat'],
+        var plainArr = ['Apple', 'Mango', 'Argentina', 'Monkey', 'Bellisimo', 'Ball', 'Cat', 'Belgium'],
         arrObj = [
                 {
                     id: '1',
@@ -74,9 +74,9 @@
         
         var suggestionOption = {
             dataCanvas: {
-                source: arrObj,
-                hooks: ['id', 'itemID'],
-                displayKeyName: "text"
+                source: url,
+                hooks: ['FundCode', 'Currency'],
+                displayKeyName: "FundName"
             },
             minimumType: 1,
             noOfItems: 10,
