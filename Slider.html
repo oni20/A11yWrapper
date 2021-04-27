@@ -28,9 +28,11 @@
     </div>
 
     <div class="container" role="main">
-        <nav class="breadcrumb">
-            <a class="breadcrumb-item" href="index.html">Home</a>
-            <span class="breadcrumb-item active">Slider</span>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Slider</li>
+            </ol>
         </nav>
 
         <div class="row mt-4">
@@ -44,7 +46,7 @@
                             <a class="nav-link active" href="#configuration">Configuration</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="#multiple">Multiple initiation</a>
+                            <a class="nav-link active" href="#multiple">Multiple use</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" href="#accessibility">Accessibility support</a>
@@ -200,7 +202,7 @@
                 </div>
 
                 <div id="multiple">
-                    <h2>Multiple initiation</h2>
+                    <h2>How to use Slider component multiple times</h2>
                     
                     <div class="mt-2 mb-1">
                         <div class='multi-slider-container'></div>

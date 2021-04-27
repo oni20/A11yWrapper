@@ -21,7 +21,7 @@
         <div class="container">
             <h1 class="display-3">A11yWrapper carousel</h1>
             <p>
-                Make an efficient use of this carousel component by just calling it at initial load with minimal
+                Make an efficient use of this light-weight carousel component by just calling it at initial load with minimal
                 changes, few configurations and then the library will take over to create animation control, access
                 button and on top of that,
                 adapt all necessary accessibility attributes.
@@ -30,13 +30,15 @@
     </div>
 
     <div class="container" role="main">
-        <nav class="breadcrumb">
-            <a class="breadcrumb-item" href="index.html">Home</a>
-            <span class="breadcrumb-item active">Carousel</span>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Carousel</li>
+            </ol>
         </nav>
 
         <div class="row mt-4">
-            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+            <nav class="col-md-3 d-none d-md-block bg-light sidebar">
                 <div class="sidebar-sticky">
                     <ul class="nav flex-column">
                         <li class="nav-item">
@@ -46,7 +48,7 @@
                             <a class="nav-link active" href="#configuration">Configuration</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="#multiple">Multiple initiation</a>
+                            <a class="nav-link active" href="#multiple">Multiple use</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" href="#accessibility">Accessibility support</a>
@@ -56,74 +58,7 @@
             </nav>
 
             <div class="col-sm-12 col-md-9">
-                <div id="carousel" class="carousel">
-                    <div class="carousel-container">
-                        <ul>
-                            <li class="slide">
-                                <div>
-                                    <a href="#">
-                                        <img src="https://www.w3schools.com/howto/img_mountains_wide.jpg"
-                                            style="width:100%">
-                                    </a>
-                                    <div class="text" style="
-                                    font-size: 15px;
-                                    width: 100%;
-                                    text-align: center;
-                                    color: black;
-                                ">Caption One</div>
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna
-                                        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-                                        ut
-                                        aliquip ex ea commodo consequat.
-                                    </p>
-                                </div>
-                            </li>
-                            <li class="slide">
-                                <div>
-                                    <img src="https://www.w3schools.com/howto/img_mountains_wide.jpg"
-                                        style="width:100%">
-                                    <div class="text" style="
-                                    font-size: 15px;
-                                    width: 100%;
-                                    text-align: center;
-                                    color: black;
-                                ">Caption two</div>
-                                </div>
-                            </li>
-                            <li class="slide">
-                                <div>
-                                    <img src="https://www.w3schools.com/howto/img_snow_wide.jpg" style="width:100%">
-                                    <div class="text" style="
-                                    font-size: 15px;
-                                    width: 100%;
-                                    text-align: center;
-                                    color: black;
-                                ">Caption Three</div>
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna
-                                        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-                                        ut
-                                        aliquip ex ea commodo consequat.
-                                    </p>
-                                </div>
-                            </li>
-                            <li class="slide">
-                                <div>
-                                    <img src="https://www.w3schools.com/howto/img_nature_wide.jpg" style="width:100%">
-                                    <div class="text" style="
-                                    font-size: 15px;
-                                    width: 100%;
-                                    text-align: center;
-                                    color: black;
-                                ">Caption Four</div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                <h2>Demo</h2>
 
                 <div id="carousel1" class="carousel">
                     <div class="carousel-container">
@@ -199,17 +134,421 @@
                 <div id="init" class="mt-5">
                     <h2>Initial setup</h2>
                     <p>
-                        Paste below HTML structure at your code where you want Slider to appear. Any ID or classname is
-                        fine.
-                        Call the slider component from Wrapper library and Slider
+                        Paste below HTML structure at your code where you want Carousel to appear. Any ID should be fine but make sure following
+                        class name are used. This is necessary to pull styles from the CSS file. These CSS can be customized as well.
+                        Any kind of design can be put inside &lt;li&gt;&lt;/li&gt; element.                        
                     </p>
-                    <pre>
-                    <code>
-                    <span>
-                        &lt;div id="sliderID" class='slider-class'&gt;&lt;/div&gt;
-                    </span>
-                    </code>
-                    </pre>
+    <pre>
+    <code>
+    <span>                        
+    &lt;div id="carousel1" class="carousel1"&gt;
+        &lt;div class="carousel-container"&gt;
+            &lt;ul&gt;
+                &lt;li class="slide"&gt;
+                    ...
+                &lt;/li&gt;
+                &lt;li class="slide"&gt;
+                    ...
+                &lt;/li&gt;
+                &lt;li class="slide"&gt;
+                    ...
+                &lt;/li&gt;
+                &lt;li class="slide"&gt;
+                    ...
+                &lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    </span>
+    </code>
+    </pre>
+                    <p>Call the slider component from Wrapper library and Slider</p>
+    <pre>
+    <code>
+    <span>                        
+    var carouselOptions = {
+        slidenav: true,
+        animate: false,
+        animationTimeSlots: [2, 4, 2, 3], // Number in seconds
+        animationType: "fade", // accepted value -> rtl, fade
+        startAnimated: true,
+        language: "EN",
+        liveSRText: "Merchandise %current% of %total%",
+        Buttons: {
+            controlButtons: {
+                "isIcon": false,
+                "prev": {
+                    "icon": "<img alt='Previous Item' src='https://www.w3.org/WAI/tutorials/img/chevron-left-75c7dd0b.png' />",
+                    "ariaText": "Previous"
+                },
+                "next": {
+                    "icon": "<img alt='Previous Item' src='https://www.w3.org/WAI/tutorials/img/chevron-right-2f19bc8b.png' />",
+                    "ariaText": "Next"
+                }
+            },
+            animationButtons: {
+                "play": {
+                    "icon": "▶",
+                    "ariaText": "Stop Animation"
+                },
+                "pause": {
+                    "icon": "￭",
+                    "ariaText": "Start Animation"
+                }
+            },
+            slideNavButtons: {
+                "activeItemSRText": "(Current Item)",
+                "itemDescriptionSRText": "Merchandise"
+            }
+        }
+    };
+
+    window.onload = (event) => {
+        window.A11yWrapper('.carousel1').carousal(carouselOptions);
+    };
+
+    OR
+
+    window.addEventListener('load', function () {
+        window.A11yWrapper('.carousel1').carousal(carouselOptions);
+    });
+
+    OR
+    
+    //jQuery Users
+    $( document ).ready(function() {
+        window.A11yWrapper('.carousel1').carousal(carouselOptions);
+    });
+
+    </span>
+    </code>
+    </pre>
+                </div>
+
+                <div id="configuration">
+                    <h2>Configuration</h2>
+                    <p>
+                        All sort of customization need to be passed as an Object.
+                        Carousel settings can be customized by altering few attributes like
+                    </p>
+                    
+                    <table class="table table-bordered">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>Key name</th>
+                                <th>Type</th>
+                                <th>Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>slidenav</td>
+                                <td>Boolean</td>
+                                <td>
+                                    <p><strong>true:</strong> Display carousel navigation control at the bottom of each slide</p>
+                                    <p><strong>false:</strong> Hide navigation control</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>animate</td>
+                                <td>Boolean</td>
+                                <td>
+                                    This will impact if only <strong>slidenav</strong> key value set to true.
+                                    <p class='mt-3'><strong>true:</strong> Show Play/ Pause buttons</p>
+                                    <p><strong>false:</strong> Hide Play/ Pause buttons</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>animationTimeSlots</td>
+                                <td>array of integers</td>
+                                <td>Number inside array defines seconds for each slide. For an example,
+                                    consider Carousel has 3 slides. First and last slide will move in every 3 seconds and second slide will move
+                                    faster like 1 seconds. In that case, pass [3,1,3]. Here each number will be assigned to slide suquentially.
+                                    
+                                    <p class='mt-3'>
+                                        Passing one item in array will assign the time to all sliders. For an example - [2] will assign 2 seconds 
+                                        delay to all slides. Default time is [3]
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>animationType</td>
+                                <td>String</td>
+                                <td>Only supported type is 'fade'. 'rtl' (Right to left) and 'ltr' (Left to right) is in progress</td>
+                            </tr>
+                            <tr>
+                                <td>startAnimated</td>
+                                <td>Boolean</td>
+                                <td>
+                                    <p><strong>true:</strong> Carousel start animation on page load</p>
+                                    <p><strong>false:</strong> Animation won't start</p>
+                                </td>
+                            </tr>                            
+                            <tr>
+                                <td>language</td>
+                                <td>String</td>
+                                <td>
+                                    This option is meant for localization. Work is in progress !!
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>liveSRText</td>
+                                <td>String</td>
+                                <td>
+                                    Screen reader content stating type of carousel any which number is displaying out of total number of slides.
+                                    Format is important to show current slide and total slide number. Following format is allowed
+                                    <code>
+                                        "Any text %current% of %total%",
+                                    </code>
+                                    Here <strong>%current%</strong> and <strong>%total%</strong> are fixed words for the library and will be replaced with actual number dynamically.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Buttons</td>
+                                <td>Object</td>
+                                <td>
+                                    This object contains following keys to hold information about icons and screen reader contents
+                                    <ul>
+                                        <li><strong>controlButtons</strong>
+                                            <ul>
+                                                <li><strong>isIcon</strong> - This is Boolean type and determine whether icon tag passed on following keys or not.
+                                                    <p class="mt-2"><strong>true:</strong> Icons will be treated as HTML element and place on PAGE</p>
+                                                    <p><strong>false:</strong> Icons will be considered as plain text</p>
+                                                </li>
+                                                <li><strong>prev</strong>
+                                                    <ul>
+                                                        <li><strong>icon</strong> - This is String type and accept any icon or image tag passed as string</li>
+                                                        <li><strong>ariaText</strong> - Screen reader text for the icon</li>
+                                                    </ul>
+                                                </li>
+                                                <li><strong>next</strong>
+                                                    <ul>
+                                                        <li><strong>icon</strong> - This is String type and accept any icon or image tag passed as string</li>
+                                                        <li><strong>ariaText</strong> - Screen reader text for the icon</li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li><strong>animationButtons</strong>
+                                            <ul>
+                                                <li><strong>play</strong>
+                                                    <ul>
+                                                        <li><strong>icon</strong> - This is String type and accept any icon or image tag passed as string</li>
+                                                        <li><strong>ariaText</strong> - Screen reader text for the icon</li>
+                                                    </ul>
+                                                </li>
+                                                <li><strong>pause</strong>
+                                                    <ul>
+                                                        <li><strong>icon</strong> - This is String type and accept any icon or image tag passed as string</li>
+                                                        <li><strong>ariaText</strong> - Screen reader text for the icon</li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li><strong>slideNavButtons</strong>
+                                            <ul>
+                                                <li><strong>activeItemSRText</strong> - This is String type. This field describes active carousel item</li>
+                                                <li><strong>itemDescriptionSRText</strong> - This is String type. This field describes type of carousel item</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="multiple">
+                    <h2>How to use Carousel component multiple times</h2>
+                    
+                    <div class="mt-2 mb-1">
+                        <div id="carousel2" class="multi-carousel">
+                            <div class="carousel-container">
+                                <ul>
+                                    <li class="slide">
+                                        <div>
+                                            <a href="#">
+                                                <img src="https://www.w3schools.com/howto/img_mountains_wide.jpg" style="width:100%">
+                                            </a>
+                                            <div class="text" style="
+                                                        font-size: 15px;
+                                                        width: 100%;
+                                                        text-align: center;
+                                                        color: black;
+                                                    ">Caption One</div>
+                                            <p>
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                                incididunt ut labore et dolore magna
+                                                aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+                                                ut
+                                                aliquip ex ea commodo consequat.
+                                            </p>
+                                        </div>
+                                    </li>
+                                    <li class="slide">
+                                        <div>
+                                            <img src="https://www.w3schools.com/howto/img_mountains_wide.jpg" style="width:100%">
+                                            <div class="text" style="
+                                                        font-size: 15px;
+                                                        width: 100%;
+                                                        text-align: center;
+                                                        color: black;
+                                                    ">Caption two
+                                                <a href="#">Test Link</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="slide">
+                                        <div>
+                                            <img src="https://www.w3schools.com/howto/img_snow_wide.jpg" style="width:100%">
+                                            <div class="text" style="
+                                                        font-size: 15px;
+                                                        width: 100%;
+                                                        text-align: center;
+                                                        color: black;
+                                                    ">Caption Three</div>
+                                            <p>
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                                incididunt ut labore et dolore magna
+                                                aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+                                                ut
+                                                aliquip ex ea commodo consequat.
+                                            </p>
+                                        </div>
+                                    </li>
+                                    <li class="slide">
+                                        <div>
+                                            <img src="https://www.w3schools.com/howto/img_nature_wide.jpg" style="width:100%">
+                                            <div class="text" style="
+                                                        font-size: 15px;
+                                                        width: 100%;
+                                                        text-align: center;
+                                                        color: black;
+                                                    ">Caption Four</div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-1">
+                        <div id="carousel3" class="multi-carousel">
+                            <div class="carousel-container">
+                                <ul>
+                                    <li class="slide">
+                                        <div>
+                                            <a href="#">
+                                                <img src="https://www.w3schools.com/howto/img_mountains_wide.jpg" style="width:100%">
+                                            </a>
+                                            <div class="text" style="
+                                                                            font-size: 15px;
+                                                                            width: 100%;
+                                                                            text-align: center;
+                                                                            color: black;
+                                                                        ">Caption One</div>
+                                            <p>
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                                incididunt ut labore et dolore magna
+                                                aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+                                                ut
+                                                aliquip ex ea commodo consequat.
+                                            </p>
+                                        </div>
+                                    </li>
+                                    <li class="slide">
+                                        <div>
+                                            <img src="https://www.w3schools.com/howto/img_mountains_wide.jpg" style="width:100%">
+                                            <div class="text" style="
+                                                                            font-size: 15px;
+                                                                            width: 100%;
+                                                                            text-align: center;
+                                                                            color: black;
+                                                                        ">Caption two
+                                                <a href="#">Test Link</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="slide">
+                                        <div>
+                                            <img src="https://www.w3schools.com/howto/img_snow_wide.jpg" style="width:100%">
+                                            <div class="text" style="
+                                                                            font-size: 15px;
+                                                                            width: 100%;
+                                                                            text-align: center;
+                                                                            color: black;
+                                                                        ">Caption Three</div>
+                                            <p>
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                                incididunt ut labore et dolore magna
+                                                aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+                                                ut
+                                                aliquip ex ea commodo consequat.
+                                            </p>
+                                        </div>
+                                    </li>
+                                    <li class="slide">
+                                        <div>
+                                            <img src="https://www.w3schools.com/howto/img_nature_wide.jpg" style="width:100%">
+                                            <div class="text" style="
+                                                                            font-size: 15px;
+                                                                            width: 100%;
+                                                                            text-align: center;
+                                                                            color: black;
+                                                                        ">Caption Four</div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <p>
+                        Carousel can be positioned in multiple places while initiating the library. Also, multiple carousel
+                        can have different configurations as well. Below two ways, Carousel can be called several times.
+                    </p>
+                    <ul>
+                        <li>
+                            Using multiple ID.
+                            <p class="mt-3">
+                                Call wrapper class multiple times for each distinctive ID.
+                            </p>
+    <pre>
+    <code>
+    <span>
+    var carouselOption1 = {...},
+        carouselOption2 = {...};
+
+    window.addEventListener('load', function () {
+        window.A11yWrapper('#carousel_id_1').carousal(carouselOption1);
+        window.A11yWrapper('#carousel_id_2').carousal(carouselOption2);
+    });
+    </span>
+    </code>
+    </pre>
+                        </li>
+                        <li>
+                            Using same class for multiple elements.
+                            <p class="mt-3">
+                                In below example, configuration object will be assigned sequentially. First object
+                                will be assigned to first Carousel and second object will be assigned to second Carousel.
+                                If only one configuration object is passed then both Carousels will be built upon that single
+                                configuration object.
+                            </p>
+    <pre>
+    <code>
+    <span>
+    var carouselOption1 = {...},
+    carouselOption2 = {...};
+
+    window.addEventListener('load', function () {
+        window.A11yWrapper('.carousel').carousal(carouselOption1, carouselOption2);
+    });
+    </span>
+    </code>
+    </pre>                            
+                        </li>
+                    </ul>                    
                 </div>
 
                 <div id="accessibility">
@@ -217,13 +556,13 @@
                     <p class="lead mt-3">Keyboard interaction</p>
                     <ul>
                         <li>
-                            <strong>HOME/ END</strong> - HOME key press move Slider to initial position. END key press move slider to max position
+                            <strong>TAB</strong> - Press TAB key to focus on carousel controls and operate
                         </li>
                         <li>
-                            <strong>PAGE UP/ DOWN</strong> - PAGE UP or PAGE DOWN key press jump slider by the position. It can be either 10 or 15 etc.
+                            <strong>MOUSE MOVE</strong> - MOUSE HOVER will stop the animation and live region describe the current slide information
                         </li>
                         <li>
-                            <strong>RIGHT/ LEFT/ UP/ DOWN</strong> - RIGHT and UP arrow key increase Slider value. LEFT and DOWN key decrease slider value. 
+                            <strong>ENTER</strong> - ENTER key press will select the slide or activate corresponding controls
                         </li>
                     </ul>
                 </div>
@@ -281,8 +620,8 @@
 
     <script type="text/javascript">
         var carouselOptions1 = {
-            slidenav: true,
-            animate: false,
+            slidenav: false,
+            animate: true,
             animationTimeSlots: [2, 4, 2, 3], // Number in seconds
             animationType: "fade", // accepted value -> rtl, fade
             startAnimated: true,
@@ -320,7 +659,7 @@
                 slidenav: true,
                 animate: true,
                 animationTimeSlots: [3, 4, 2, 2],
-                animationType: "fade", // accepted value -> rtl, fade
+                animationType: "fade",
                 startAnimated: true,
                 language: "EN",
                 liveSRText: "New Merchandise %current% of %total%",
@@ -354,7 +693,8 @@
             };
 
         window.onload = (event) => {
-            window.A11yWrapper('.carousel').carousal(carouselOptions1, carouselOptions2);
+            window.A11yWrapper('.carousel').carousal(carouselOptions1);
+            window.A11yWrapper('.multi-carousel').carousal(carouselOptions1, carouselOptions2);            
         };
     </script>
 </body>
