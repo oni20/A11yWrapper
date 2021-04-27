@@ -117,7 +117,8 @@
         SRText: {
             instruction: "When autocomplete results are available use up and down arrows to review and enter to select.  Touch device users, explore by touch or with swipe gestures.",
             announceCount: "%number% suggestions found. Use up and down arrows to navigate",
-            suggestionBoxLabel: "List of suggestions"
+            suggestionBoxLabel: "List of suggestions",
+            closeBtn: "Close button"
         }
     };
 
@@ -217,6 +218,7 @@
                                         <li><strong>instruction</strong> - This is String type and define instruction on about how to use the Suggestion box</li>
                                         <li><strong>announceCount</strong> - This is String type and defines number of available suggestions at run time</li>
                                         <li><strong>suggestionBoxLabel</strong> - This is String type and place before suggestion box as Label.</li>
+                                        <li><strong>closeBtn</strong> - This is String type and screen reader content for close button.</li>
                                     </ul>
                                 </td>
                             </tr>
@@ -292,7 +294,8 @@
             SRText: {
                 instruction: "When autocomplete results are available use up and down arrows to review and enter to select.  Touch device users, explore by touch or with swipe gestures.",
                 announceCount: "%number% suggestions found. Use up and down arrows to navigate",
-                suggestionBoxLabel: "List of suggestions"
+                suggestionBoxLabel: "List of suggestions",
+                closeBtn: "Close button"
             },
             onItemSelected: function (data) {
                 console.log('Selected Item: ', data);
@@ -498,7 +501,8 @@
             SRText: {
                 instruction: "When autocomplete results are available use up and down arrows to review and enter to select.  Touch device users, explore by touch or with swipe gestures.",
                 announceCount: "%number% suggestions found. Use up and down arrows to navigate",
-                suggestionBoxLabel: "List of suggestions"
+                suggestionBoxLabel: "List of suggestions",
+                closeBtn: "Close button"
             },
             onItemSelected: function (data) {
                 console.log('Selected Item: ', data);
