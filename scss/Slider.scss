@@ -14,32 +14,32 @@ $blue: #6d62f9;
         width: em(300px);
         margin: em(2px);
         padding: em(4px);
+        border: em(1px) solid #d7d0d0;
         border-radius: em(10px);
-        background-color: #ebebeb;
+        background-color: #d9d9d9;
         position: inherit;
         top: 2em;
         height: em(4px);
 
         .thumb {
             border-radius: 50%;
-            background-color: $blue;
+            background-color: #6e6d6d;
             position: relative;
-            box-shadow: 0 2px 5px 0 #000000ab;
+            box-shadow: 0 em(2px) em(5px) 0 #000000ab;
 
             &:focus {
                 outline: 0;
-                box-shadow: 0px 0px 6px 9px #6d62f942;
+                box-shadow: 0px 0px em(5px) 0px rgb(1, 0, 18);
             }
 
             &.focus,
             &:hover {
                 cursor: pointer;
-                background-color: $blue;
+                background-color: #3a3a3a;
             }
         }
 
         &.focus {
-            background-color: #aaa;
             outline: 0;
         }
     }

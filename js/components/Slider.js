@@ -31,15 +31,15 @@ import Utility from './Utility';
   }
 })();
 
-function A11ySlider(container, options, index) {
+function A11ySlider(container, options) {
   this.container = container;
-  this.rollNo = index;
+  this.rollNo = options.id;
 
 
   this.valueDomNode = false;
   this.railWidth = 0;
-  this.thumbWidth = 17;
-  this.thumbHeight = 20;
+  this.thumbWidth = 20;
+  this.thumbHeight = 26;
   this.keyCode = Object.freeze({
     'left': 37,
     'up': 38,
@@ -55,6 +55,7 @@ function A11ySlider(container, options, index) {
   this.valueMin = options ? options.min || 0 : 0;
   this.valueMax = options ? options.max || 100 : 100;
   this.valueNow = options ? options.now || 0 : 0;
+  this.stepper = options ? options.stepper > 0 ? options.stepper : 10 : 10;
   this.label = options ? options.label || 'Slider' : 'Slider';
   this.output = options ? options.output || '' : '';
 
@@ -182,12 +183,12 @@ A11ySlider.prototype.handleKeyDown = function (event) {
       break;
 
     case context.keyCode.pageDown:
-      context.moveSliderTo(context.valueNow - 10);
+      context.moveSliderTo(context.valueNow - context.stepper);
       flag = true;
       break;
 
     case context.keyCode.pageUp:
-      context.moveSliderTo(context.valueNow + 10);
+      context.moveSliderTo(context.valueNow + context.stepper);
       flag = true;
       break;
 

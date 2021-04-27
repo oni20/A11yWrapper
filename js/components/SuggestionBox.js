@@ -29,7 +29,7 @@ function A11ySuggestionBox(element, options) {
   this.noOfItems = options.noOfItems ? options.noOfItems : 10;
   this.minimumType =  options.minimumType ? options.minimumType : 2;
   this.SRText = options.SRText;
-  this.screenReaderClassName = options.screenReaderClassName === "" ? "visually-hidden" : options.screenReaderClassName;
+  this.screenReaderClassName = "visually-hidden";
   this.dataCanvas = options.dataCanvas ? options.dataCanvas
   : {
     source: [],

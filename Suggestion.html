@@ -7,81 +7,286 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+        integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="dist/css/SourcePage.css" />
     <link rel="stylesheet" href="dist/css/A11yWrapper.css" />
 
     <title>Accessible and Responsive Carousel</title>
 </head>
 
 <body>
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="display-3">A11yWrapper auto suggestion box</h1>
+            <p>
+                It's a JS based component which requires less coding and satisfy project need efficiently.
+                Create your own setting following the hooks provided by this component and point out the input box
+                which will act as Suggestion box and then Voila !!
+            </p>
+        </div>
+    </div>
     <div class="container" role="main">
-        <h1>Accessible and responsive suggestion box</h1>
+        <nav class="breadcrumb">
+            <a class="breadcrumb-item" href="index.html">Home</a>
+            <span class="breadcrumb-item active">Suggestion box</span>
+        </nav>
 
-        <div class="row">
-            <div class="col-sm-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2 fund_finder_form_wrapper">
+        <div class="row mt-4">
+            <nav class="col-md-3 d-none d-md-block bg-light sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#init">Initial setup</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#configuration">Configuration</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#multiple_data_source">Different data source scenarios</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#multiple">Multiple use of suggestion box</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#accessibility">Accessibility support</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <div class="col-sm-12 col-md-9">
+                <h2>Demo</h2>
                 <!-- Search input -->
                 <div class="a11y_search_field">
-                    <form id="fundFinderForm" name="fundFinderForm" class="fund-finder-form">
+                    <form name="a11ySuggestionForm" class="fund-finder-form">
                         <div class="a11y_input_wrapper">
-                            <label class="sr-only" for="a11y_input_box">Search by word</label>
-                            <input id="a11y_input_box" name="a11y_input_box" type="text"
-                                class="form-control" autocomplete="off" aria-owns="res"
-                                aria-autocomplete="both" placeholder="Search by word">
+                            <label for="a11y_input_box">Search by word</label>
+                            <input id="a11y_input_box" name="a11y_input_box" type="text" class="form-control"
+                                autocomplete="off" aria-owns="res" aria-autocomplete="both"
+                                placeholder="Search by word">
                         </div>
                     </form>
                 </div>
-            </div>
-        </div>
-    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
-        crossorigin="anonymous"></script>
+                <div id="init" class="mt-5">
+                    <h2>Initial setup</h2>
+                    <p>
+                        Paste below HTML structure at your code where you want Suggestion box to appear. Make sure 
+                        you use "a11y_input_wrapper" class to the parent DIV element. This class holds styling for
+                        suggestion box. Any custom class can be declared afterward.
+                    </p>
 
-    <script src="dist/js/A11yWrapper.min.js" type="text/javascript"></script>
+    <pre>
+    <code>
+    <span>
+    &lt;div class="a11y_input_wrapper"&gt;
+        &lt;label class="sr-only" for="a11y_input_box"&gt;Search by word&lt;/label&gt;
+        &lt;input id="a11y_input_box" name="a11y_input_box" type="text" 
+            class="form-control"
+            autocomplete="off" aria-owns="res" aria-autocomplete="both"
+            placeholder="Search by word"&gt;
+    &lt;/div&gt;
+    </span>
+    </code>
+    </pre>
 
-    <script type="text/javascript">
-        var plainArr = ['Apple', 'Mango', 'Argentina', 'Monkey', 'Bellisimo', 'Ball', 'Cat', 'Belgium'],
-        arrObj = [
-                {
-                    id: '1',
-                    itemID:'10',
-                    text: 'Apple',
-                    desc: 'Apple is a nice fruit'
-                },
-                {
-                    id: '2',
-                    itemID:'20',
-                    text: 'Argentina',
-                    desc: 'Argentina is a country'
-                },
-                {
-                    id: '3',
-                    itemID:'30',
-                    text: 'Ball',
-                    desc: 'Ball is a object'
-                },
-                {
-                    id: '4',
-                    itemID:'40',
-                    text: 'Batman',
-                    desc: 'Batman is a character'
-                }
-            ],
-            url = 'https://funds.dynamic.ca/fundprofiles/filter?locale=en-us'
-        
-        var suggestionOption = {
+                    <p>
+                        Call the autosuggestion component from Wrapper library at initial Load event. It can be
+                        <strong>$(document).ready(...)</strong> or <strong>Window.onload</strong> or 
+                        <strong>Window.eventListener('load', ...)</strong>. Then Suggestion box will
+                        load with default settings.
+                        <strong>
+                            Check out how to add <a href="#multiple">multiple</a> suggestion box on the page
+                        </strong>
+                    </p>
+
+    <pre>
+    <code>
+    <span>
+    var suggestionOption = {
+        dataCanvas: {
+            source: ['Apple', 'Mango', 'Argentina', 'Monkey', 'Bellisimo', 'Ball', 'Cat', 'Belgium']                                
+        },
+        minimumType: 1,
+        noOfItems: 10,
+        searchType: 'contains',
+        SRText: {
+            instruction: "When autocomplete results are available use up and down arrows to review and enter to select.  Touch device users, explore by touch or with swipe gestures.",
+            announceCount: "%number% suggestions found. Use up and down arrows to navigate",
+            suggestionBoxLabel: "List of suggestions"
+        }
+    };
+
+
+    window.addEventListener('load', function () {
+        window.A11yWrapper('#a11y_input_box').autosuggestion(suggestionOption);
+    });
+
+    OR
+
+    // JavaScript Users - ID name for one single slider 
+    window.addEventListener('load', function () {
+        window.A11yWrapper('#a11y_input_box').autosuggestion(...);
+    });
+
+    OR
+
+    //jQuery Users
+    $( document ).ready(function() {
+        window.A11yWrapper('#a11y_input_box').autosuggestion(...);
+    });
+    </span>
+    </code>
+    </pre>
+                </div>
+
+                <div id="configuration">
+                    <h2>Configuration</h2>
+                    <p>
+                        All sort of customization need to be passed as an Object. Following are the available settings which can be customized
+                    </p>
+                    
+                    <table class="table table-bordered">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>Key name</th>
+                                <th>Type</th>
+                                <th>Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>dataCanvas</td>
+                                <td>Object</td>
+                                <td>
+                                    This is a data source object and it contains three keys
+                                    <ul>
+                                        <li>
+                                            <strong>source</strong> - This is a required key and accepts 
+                                            <ul>
+                                                <li><strong>string</strong> - Only URL type string is allowed. If URL is passed then library will make a service call and fetch result</li>
+                                                <li><strong>array</strong> - plain array with any sort of items or an array of objects.</li>
+                                            </ul>
+                                            
+                                        </li>
+                                        <li>
+                                            <strong>hooks</strong> - This is an optional key and will be effective if <strong>source</strong> key holds array of 
+                                            objects. For an example, if developer wants to retrieve other keys from the object related to searched result,
+                                            then they have to mention the key names inside an array and pass it to <strong>hooks</strong> key.
+                                        </li>
+                                        <li>
+                                            <strong>displayKeyName</strong> - This key becomes mandatory if <strong>source</strong> key holds array of objects.
+                                            Developer needs to pass the specific key name which will be used to make the suggestion list. Please make sure this key exist on first level and not nested
+                                        </li>
+                                    </ul>
+                                    Checkout the multiple data source scenarios <a href="#multiple_data_source">here</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>minimumType</td>
+                                <td>Integer. No fraction allowed</td>
+                                <td>Determines how many characters need to be typed before showing the result. Default is 2</td>
+                            </tr>
+                            <tr>
+                                <td>noOfItems</td>
+                                <td>Integer. No fraction allowed</td>
+                                <td>Determines number of items to be shown inside the suggestion list. Default is 10</td>
+                            </tr>
+                            <tr>
+                                <td>searchType</td>
+                                <td>String</td>
+                                <td>
+                                    Determins the search type. Available values are
+                                    <ul>
+                                        <li><strong>contains</strong> - Empty string will be consider as "contains". This is a Default value.</li>
+                                        <li><strong>start</strong> - String starts with the typed value inside input box</li>
+                                        <li><strong>end</strong> - String ends with typed value inside input box</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>SRText</td>
+                                <td>Object</td>
+                                <td>
+                                    This is mainly a screen reader content object and it contains three keys
+                                    <ul>
+                                        <li><strong>instruction</strong> - This is String type and define instruction on about how to use the Suggestion box</li>
+                                        <li><strong>announceCount</strong> - This is String type and defines number of available suggestions at run time</li>
+                                        <li><strong>suggestionBoxLabel</strong> - This is String type and place before suggestion box as Label.</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>onItemSelected</td>
+                                <td>Function</td>
+                                <td>
+                                    This is a callback function and triggers when any item from the suggestion list is selected. 
+                                    It returns an object with key-value pair. 
+                                    If <strong>source</strong> key holds array of objects then return object will contain selected value and 
+                                    <strong>hooks</strong> value
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>onFocusIn</td>
+                                <td>Function</td>
+                                <td>
+                                    This is a callback function and triggers when suggestion box gain focus and return current value from the input box
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>onFocusOut</td>
+                                <td>Function</td>
+                                <td>
+                                    This is a callback function and triggers when suggestion box loose focus and return value from the input box
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="multiple_data_source">
+                    <h2>Different data source</h2>
+                    <ul>
+                        <li>
+                            URL string
+                            
+    <pre>
+    <code>
+    <span>
+    var suggestionOption = {
             dataCanvas: {
-                source: url,
-                hooks: ['FundCode', 'Currency'],
-                displayKeyName: "FundName"
+                source: 'https://mocki.io/v1/d4867d8b-b5d5-4a48-a4ab-79131b5809b8',
+                hooks: ['city'],
+                displayKeyName: "name"
+            },            
+            ...
+        };
+
+    window.addEventListener('load', function () {
+        window.A11yWrapper('#a11y_input_box').autosuggestion(suggestionOption);
+    });
+
+    /* Return result from console log
+        Selected Item:  {name: "Harry Potter", city: "London"}
+    */
+    </span>
+    </code>
+    </pre>
+                        </li>
+                        <li>
+                            Pain array                            
+    <pre>
+    <code>
+    <span>
+    var suggestionOption = {
+            dataCanvas: {
+                source: ['Apple', 'Mango', 'Argentina', 'Monkey', 'Bellisimo', 'Ball', 'Cat', 'Belgium'],
             },
             minimumType: 1,
             noOfItems: 10,
-            searchType: 'contains', // other available values -> start , end || start = String starts with the value, end = String ends with
-            screenReaderClassName: "visually-hidden",
+            searchType: 'contains',
             SRText: {
                 instruction: "When autocomplete results are available use up and down arrows to review and enter to select.  Touch device users, explore by touch or with swipe gestures.",
                 announceCount: "%number% suggestions found. Use up and down arrows to navigate",
@@ -90,11 +295,217 @@
             onItemSelected: function (data) {
                 console.log('Selected Item: ', data);
             },
-            onFocusIn: function(data){
-                console.log('Focus In event from Callback. Selected item: ' , data);
+            onFocusIn: function (data) {
+                console.log('Focus In event from Callback. Selected item: ', data);
             },
-            onFocusOut: function(data){
-                console.log('Focus out event from Callback. Selected item: ' , data);
+            onFocusOut: function (data) {
+                console.log('Focus out event from Callback. Selected item: ', data);
+            }
+        };
+
+    window.addEventListener('load', function () {
+        window.A11yWrapper('#a11y_input_box').autosuggestion(suggestionOption);
+    });
+    </span>
+    </code>
+    </pre>
+                        </li>
+                        <li>
+                            Array of Objects
+                            
+    <pre>
+    <code>
+    <span>
+    var suggestionOption = {
+            dataCanvas: {
+                source: [
+                    {
+                        id: '1',
+                        itemID: '10',
+                        text: 'Apple',
+                        desc: 'Apple is a nice fruit'
+                    },
+                    {
+                        id: '2',
+                        itemID: '20',
+                        text: 'Argentina',
+                        desc: 'Argentina is a country'
+                    },
+                    {
+                        id: '3',
+                        itemID: '30',
+                        text: 'Ball',
+                        desc: 'Ball is a object'
+                    },
+                    {
+                        id: '4',
+                        itemID: '40',
+                        text: 'Batman',
+                        desc: 'Batman is a character'
+                    }
+                ],
+                hooks: ['itemID', 'desc'],
+                displayKeyName: "text"
+            },            
+            ...
+        };
+
+    window.addEventListener('load', function () {
+        window.A11yWrapper('#a11y_input_box').autosuggestion(suggestionOption);
+    });
+
+    /* Return result from console log
+        Selected Item:  {text: "Argentina", itemid: "20", desc: "Argentina is a country"}
+    */
+    </span>
+    </code>
+    </pre>
+                        </li>
+                    </ul>
+                </div>
+
+                <div id="multiple">
+                    <h2>How to use Suggestion box component multiple times</h2>
+                    <p>
+                        Call the wrapper class every time for different input box by passing unique ID of the box.
+                    </p>
+
+    <pre>
+    <code>
+    <span>
+        var suggestionOption = {...};
+
+        window.addEventListener('load', function () {
+            window.A11yWrapper('#input_box_1').autosuggestion(suggestionOption);
+            window.A11yWrapper('#input_box_2').autosuggestion(suggestionOption);
+        });
+    </span>
+    </code>
+    </pre>
+                    
+                </div>
+
+                <div id="accessibility">
+                    <h2>Accessibility support</h2>
+                    <p class="lead mt-3">Keyboard interaction</p>
+                    <ul>
+                        <li>
+                            <strong>ESC</strong> - ESC key press will close the suggestion box and Input box will gain focus
+                        </li>
+                        <li>
+                            <strong>TAB</strong> - Press TAB to focus the input box. Pressing TAB again would move focus to Cross (X) icon
+                        </li>
+                        <li>
+                            <strong>RETURN/ ENTER</strong> - Pressing Enter will select the item from suggeion list
+                        </li>
+                        <li>
+                            <strong>UP or DOWN arrow</strong> - Use these keys to navigate between suggestion list items
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+        <button type="button" class="btn btn-default scroll-top" aria-label="Go to Top" id="scroll_top"
+            onclick="topFunction()">
+            <span class="" aria-hidden="true">Top</span>
+        </button>
+
+        <footer>
+            <p>
+                © 2020 Md Asif Ahmed Oni / A11yWrapper. |
+                Check the project in <a href="https://github.com/oni20/A11yWrapper" target="_blank">GitHub</a> |
+                Licensed under the MIT license.
+            </p>
+        </footer>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+        integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+        integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
+        integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+        crossorigin="anonymous"></script>
+
+    <script src="dist/js/A11yWrapper.min.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        var mybutton = document.getElementById("scroll_top");
+
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function () { scrollFunction() };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+
+        // When the user clicks on the button, scroll to the top of the document
+        function topFunction() {
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        }
+    </script>
+
+    <script type="text/javascript">
+        var plainArr = ['Apple', 'Mango', 'Argentina', 'Monkey', 'Bellisimo', 'Ball', 'Cat', 'Belgium'],
+            arrObj = [
+                {
+                    id: '1',
+                    itemID: '10',
+                    text: 'Apple',
+                    desc: 'Apple is a nice fruit'
+                },
+                {
+                    id: '2',
+                    itemID: '20',
+                    text: 'Argentina',
+                    desc: 'Argentina is a country'
+                },
+                {
+                    id: '3',
+                    itemID: '30',
+                    text: 'Ball',
+                    desc: 'Ball is a object'
+                },
+                {
+                    id: '4',
+                    itemID: '40',
+                    text: 'Batman',
+                    desc: 'Batman is a character'
+                }
+            ],
+            url = 'https://mocki.io/v1/d4867d8b-b5d5-4a48-a4ab-79131b5809b8'; //'https://funds.dynamic.ca/fundprofiles/filter?locale=en-us'
+
+        var suggestionOption = {
+            dataCanvas: {
+                source: url,
+                hooks: ['city'],
+                displayKeyName: "name"
+            },
+            minimumType: 1,
+            noOfItems: 10,
+            searchType: 'contains', // other available values -> start , end || start = String starts with the value, end = String ends with
+            SRText: {
+                instruction: "When autocomplete results are available use up and down arrows to review and enter to select.  Touch device users, explore by touch or with swipe gestures.",
+                announceCount: "%number% suggestions found. Use up and down arrows to navigate",
+                suggestionBoxLabel: "List of suggestions"
+            },
+            onItemSelected: function (data) {
+                console.log('Selected Item: ', data);
+            },
+            onFocusIn: function (data) {
+                console.log('Focus In event from Callback. Selected item: ', data);
+            },
+            onFocusOut: function (data) {
+                console.log('Focus out event from Callback. Selected item: ', data);
             }
         };
         window.addEventListener('load', function () {

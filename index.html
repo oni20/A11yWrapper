@@ -7,26 +7,102 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+        integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
     <title>Accessible and Responsive Carousel</title>
+    <link rel="stylesheet" href="dist/css/SourcePage.css" />
+
 </head>
 
 <body>
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="display-3">A11yWrapper Library</h1>
+            <p>
+                This slider is purely built on JavaScript and fully customizable. Developer needs to
+                call the wrapper class and show container where slider will be created on the fly.
+            </p>
+        </div>
+    </div>
     <div class="container" role="main">
-        <h1>Accessible and responsive carousel</h1>
-        <ul>
-            <li>
-                <a href="Carousel.html">Accessible Carousel</a>
-            </li>
-            <li>
-                <a href="Suggestion.html">Accessible Suggestion box</a>
-            </li>
-            <li>
-                <a href="Slider.html">Accessible Slider</a>
-            </li>
-        </ul>
+        <div class="row">
+            <div class="col-md-9 col-lg-10">
+                <h1 class="mb-3">Create fast, accessible components with less code</h1>
+                <p class="lead mb-4">
+                    This is a purely JavaScript based library with no dependency to
+                    third party libraries. This will act as "Plug n' Play" on your project.
+                    Leverage the components from this library to create complex HTML elements and forget about making it
+                    accessible. Library will take care of it.
+                </p>
+
+                <div class="installation-mast-head d-inline-block mb-2 text-white bg-success">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" focusable="false"
+                        viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M5.854 4.146a.5.5 0 010 .708L2.707 8l3.147 3.146a.5.5 0 01-.708.708l-3.5-3.5a.5.5 0 010-.708l3.5-3.5a.5.5 0 01.708 0zm4.292 0a.5.5 0 000 .708L13.293 8l-3.147 3.146a.5.5 0 00.708.708l3.5-3.5a.5.5 0 000-.708l-3.5-3.5a.5.5 0 00-.708 0z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+
+                </div>
+
+                <h2 class="display-5 fw-normal">Installation</h2>
+
+                <section class="row mb-5 pb-md-4 align-items-center">
+                    <div class="col-md-9">
+                        <p class="lead fw-normal">
+                            Include following files to the webpage and you're good to go.
+                        </p>
+                        <p class="lead">A11yWrapper.CSS</p>
+
+                        <div class="highlight">                        
+                            <blockquote class="custom-blockquote">
+                                &lt;link rel="stylesheet" href="{location of css file}/A11yWrapper.css" /&gt;
+                            </blockquote>
+                        </div>
+
+                        <p class="lead mt-5">A11yWrapper.JS </p>
+                        
+                        <div class="highlight">                        
+                            <blockquote class="custom-blockquote">                                
+                                &lt;script src="{location of JS file}/A11yWrapper.min.js" type="text/javascript"&gt;&lt;/script&gt;
+                            </blockquote>
+                        </div>
+                    </div>
+                    <div class="col-md-7 ps-md-5">
+                        
+                    </div>
+                </section>
+
+
+
+
+
+            </div>
+
+            <div class="col-md-3 col-lg-2">
+                <h1>Components</h1>
+                <ul>
+                    <li>
+                        <a href="Carousel.html">Carousel</a>
+                    </li>
+                    <li>
+                        <a href="Suggestion.html">Suggestion box</a>
+                    </li>
+                    <li>
+                        <a href="Slider.html">Slider</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <footer>
+            <p>
+                © 2020 Md Asif Ahmed Oni / A11yWrapper. |
+                Check the project in <a href="https://github.com/oni20/A11yWrapper" target="_blank">GitHub</a> |
+                Licensed under the MIT license.
+            </p>
+        </footer>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
