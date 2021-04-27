@@ -7,52 +7,402 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+        integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 
+    <link rel="stylesheet" href="dist/css/SourcePage.css" />
     <link rel="stylesheet" href="dist/css/A11yWrapper.css" />
 
     <title>Accessible and Responsive slider</title>
 </head>
 
 <body>
-    <div class="container" role="main">
-        <h1>Accessible and slider</h1>
-
-        <div class="row">
-            <div class="col-sm-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2">
-                <div id="idSliders1" class='slider-container'></div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2">
-                <p>
-                <div id="sliderVal" class="value">0</div>
-                </p>
-            </div>
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="display-3">A11yWrapper Slider</h1>
+            <p>
+                This slider is purely built on JavaScript and fully customizable. Developer needs to
+                call the wrapper class and show container where slider will be created on the fly.
+            </p>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+    <div class="container" role="main">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Slider</li>
+            </ol>
+        </nav>
+
+        <div class="row mt-4">
+            <nav class="col-md-3 d-none d-md-block bg-light sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#init">Initial setup</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#configuration">Configuration</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#multiple">Multiple use</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#accessibility">Accessibility support</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <div class="col-sm-12 col-md-9">
+                <h2>Demo</h2>
+                <div id="idSliders1" class='slider-container'></div>
+
+                <div id="sliderVal" class="value mt-2">0</div>
+
+                <div id="init" class="mt-5">
+                    <h2>Initial setup</h2>
+                    <p>
+                        Paste below HTML structure at your code where you want Slider to appear. Any ID or classname is
+                        fine.
+                        Call the slider component from Wrapper library and Slider
+                    </p>
+
+    <pre>
+    <code>
+    <span>
+        &lt;div id="sliderID" class='slider-class'&gt;&lt;/div&gt;
+    </span>
+    </code>
+    </pre>
+
+                    <p>
+                        Call the slider component from Wrapper library at initial Load event. It can be
+                        <strong>$(document).ready(...)</strong> or <strong>Window.onload</strong> or 
+                        <strong>Window.eventListener('load', ...)</strong>. Then slider will
+                        load with default settings.
+                        <strong>
+                            Check out how to add <a href="#multiple">multiple</a> sliders on the page
+                        </strong>
+                    </p>
+
+    <pre>
+    <code>
+    <span>
+        // JavaScript Users - Class name for Multiple slider 
+        window.addEventListener('load', function () {
+            window.A11yWrapper('.slider-class').slider();
+        });
+
+        // JavaScript Users - ID name for one single slider 
+        window.addEventListener('load', function () {
+            window.A11yWrapper('#sliderID').slider();
+        });
+
+        //jQuery Users
+        $( document ).ready(function() {
+            window.A11yWrapper('#sliderID').slider();
+        });
+    </span>
+    </code>
+    </pre>
+                </div>
+
+                <div id="configuration">
+                    <h2>Configuration</h2>
+                    <p>
+                        All sort of customization need to be passed as an Object.
+                        Slider settings can be customized by altering few attributes like
+                    </p>
+                    <table class="table table-bordered">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>Key name</th>
+                                <th>Type</th>
+                                <th>Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>id</td>
+                                <td>String</td>
+                                <td>It's a required attribute and necessary to follow accessibility
+                                    guideline. This should be unique and </td>
+                            </tr>
+                            <tr>
+                                <td>min</td>
+                                <td>Integer. No fraction allowed</td>
+                                <td>Determine minimum value to start with. Default is O</td>
+                            </tr>
+                            <tr>
+                                <td>max</td>
+                                <td>Integer. No fraction allowed</td>
+                                <td>Determine the maximum value Slider will hold. Default is 100</td>
+                            </tr>
+                            <tr>
+                                <td>now</td>
+                                <td>Integer. No fraction allowed</td>
+                                <td>Set initial value in Slider. Default is 0</td>
+                            </tr>
+                            <tr>
+                                <td>stepper</td>
+                                <td>Integer. No fraction allowed</td>
+                                <td>Set the jump count of Slider. This is necessary for PAGE UP and PAGE DOWN keys.
+                                    For an example - If stepped is set to 10 then pressing PAGE UP will increment slider value by 10.
+                                    Default is 10</td>
+                            </tr>                            
+                            <tr>
+                                <td>label</td>
+                                <td>String</td>
+                                <td>Label stating purpose of Slider. This is a required key. Passing empty string
+                                    will display default string from Library which is 'Slider'
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>output</td>
+                                <td>String</td>
+                                <td>Pass the reference (ID or Class) of a container where result would display when
+                                    slider
+                                    moves</td>
+                            </tr>
+                            <tr>
+                                <td>onSliderChange</td>
+                                <td>Function</td>
+                                <td>This is a callback function and triggers whenever Slider moves. It always returns
+                                    Slider
+                                    value
+                                    after movement.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+    <pre>
+    <code>
+    <span>
+    var sliderOption = {
+        min: 0,
+        max: 255,
+        now: 50,
+        stepper: 10,
+        label: 'Demo slider',
+        output: '#sliderVal',
+        onSliderChange: function (data) {
+            console.log('Selected Item: ', data);
+        }
+    };
+
+    window.addEventListener('load', function () {
+        window.A11yWrapper('.slider-class').slider(sliderOption);
+    });
+    </span>
+    </code>
+    </pre>
+                </div>
+
+                <div id="multiple">
+                    <h2>How to use Slider component multiple times</h2>
+                    
+                    <div class="mt-2 mb-1">
+                        <div class='multi-slider-container'></div>
+                        <div id="sliderValMulti1" class="value mt-2">0</div>
+                    </div>
+
+                    <div class="mb-1">
+                        <div class='multi-slider-container'></div>
+                        <div id="sliderValMulti2" class="value mt-2">0</div>
+                    </div>
+                    
+                    <p>
+                        Slider can be positioned in multiple places while initiating the library. Also, multiple slider
+                        can have different configurations as well. Below two ways, Slider can be called several times.
+                    </p>
+                    <ul>
+                        <li>
+                            Using multiple ID.
+                            <p class="mt-3">
+                                Call wrapper class multiple times for each distinctive ID.
+                            </p>
+    <pre>
+    <code>
+    <span>
+    var sliderOption1 = {
+        min: 0,
+        max: 255,
+        now: 50,
+        label: 'Demo slider',
+        output: '#sliderVal',
+        onSliderChange: function (data) {
+            console.log('Selected Item: ', data);
+        }
+    },
+    sliderOption2 = {
+        min: 0,
+        max: 255,
+        now: 50,
+        label: 'Demo slider',
+        output: '#sliderVal',
+        onSliderChange: function (data) {
+            console.log('Selected Item: ', data);
+        }
+    },
+
+    window.addEventListener('load', function () {
+        window.A11yWrapper('#id_1').slider(sliderOption1);
+        window.A11yWrapper('#id_2').slider(sliderOption2);
+    });
+    </span>
+    </code>
+    </pre>
+                        </li>
+                        <li>
+                            Using same class for multiple elements.
+                            <p class="mt-3">
+                                In below example, configuration object will be assigned sequentially. First object
+                                will be assigned to first Slider and second object will be assigned to second Slider.
+                                If only one configuration object is passed then both Slider will be built upon that single
+                                configuration object.
+                            </p>
+    <pre>
+    <code>
+    <span>
+    var sliderOption1 = {
+        min: 0,
+        max: 255,
+        now: 50,
+        label: 'Demo slider',
+        output: '#sliderVal',
+        onSliderChange: function (data) {
+            console.log('Selected Item: ', data);
+        }
+    },
+    sliderOption2 = {
+        min: 0,
+        max: 255,
+        now: 50,
+        label: 'Demo slider',
+        output: '#sliderVal',
+        onSliderChange: function (data) {
+            console.log('Selected Item: ', data);
+        }
+    },
+
+    window.addEventListener('load', function () {
+        window.A11yWrapper('.slider-class').slider(sliderOption1, sliderOption2);
+    });
+    </span>
+    </code>
+    </pre>                            
+                        </li>
+                    </ul>                    
+                </div>
+
+                <div id="accessibility">
+                    <h2>Accessibility support</h2>
+                    <p class="lead mt-3">Keyboard interaction</p>
+                    <ul>
+                        <li>
+                            <strong>HOME/ END</strong> - HOME key press move Slider to initial position. END key press move slider to max position
+                        </li>
+                        <li>
+                            <strong>PAGE UP/ DOWN</strong> - PAGE UP or PAGE DOWN key press jump slider by the position. It can be either 10 or 15 etc.
+                        </li>
+                        <li>
+                            <strong>RIGHT/ LEFT/ UP/ DOWN</strong> - RIGHT and UP arrow key increase Slider value. LEFT and DOWN key decrease slider value. 
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+        <button type="button" class="btn btn-default scroll-top" aria-label="Go to Top" id="scroll_top" onclick="topFunction()">
+            <span class="" aria-hidden="true">Top</span>
+        </button>
+
+        <footer>
+            <p>
+                © 2020 Md Asif Ahmed Oni / A11yWrapper. |
+                Check the project in <a href="https://github.com/oni20/A11yWrapper" target="_blank">GitHub</a> |
+                Licensed under the MIT license.
+            </p>
+        </footer>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+        integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+        integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
+        integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
         crossorigin="anonymous"></script>
 
     <script src="dist/js/A11yWrapper.min.js" type="text/javascript"></script>
 
     <script type="text/javascript">
+        var mybutton = document.getElementById("scroll_top");
+
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function () { scrollFunction() };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+
+        // When the user clicks on the button, scroll to the top of the document
+        function topFunction() {
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        }
+    </script>
+
+    <script type="text/javascript">
         var sliderOption = {
+            id:'slider_1',
             min: 0,
             max: 255,
             now: 50,
-            label: 'Red',
+            stepper: 0,
+            label: 'Slider label',
             output: '#sliderVal',
             onSliderChange: function (data) {
                 console.log('Selected Item: ', data);
             }
         };
 
+        var multiSliderOption1 = {
+            id:'slider_2',
+            min: 0,
+            max: 100,
+            now: 10,
+            label: 'Multi Slider 1',
+            output: '#sliderValMulti1',
+            onSliderChange: function (data) {
+                console.log('Selected Item: ', data);
+            }
+        },
+            multiSliderOption2 = {
+                id:'slider_3',
+                min: 0,
+                max: 255,
+                now: 50,
+                label: 'Multi Slider 2',
+                output: '#sliderValMulti2',
+                onSliderChange: function (data) {
+                    console.log('Selected Item: ', data);
+                }
+            };
+
         window.addEventListener('load', function () {
-            window.A11yWrapper('.slider-container').slider(sliderOption);
+            window.A11yWrapper('#idSliders1').slider(sliderOption);
+            window.A11yWrapper('.multi-slider-container').slider(multiSliderOption1, multiSliderOption2);
         });
 
     </script>

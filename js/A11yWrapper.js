@@ -24,8 +24,7 @@ _A11yWrapper.prototype = {
         this.node.forEach((node, index) => {
             return new A11ySlider(
                 node,
-                settings[index] === undefined ? settings[0] : settings[index],
-                index
+                settings[index] === undefined ? settings[0] : settings[index]
             );
         });
     },

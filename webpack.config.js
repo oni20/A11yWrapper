@@ -12,7 +12,8 @@ const config = {
 		A11yWrapper: [
 			"./js/A11yWrapper.js",
 			"./scss/A11yWrapper.scss",
-		]
+		],
+		SourcePage: ["./scss/SourcePage.scss"]
 	},
 	output: {
 		path: path.resolve(__dirname, "dist"),

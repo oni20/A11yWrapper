@@ -3,15 +3,15 @@
 .a11y_search_field {
     display: block;
     width: 100%;
-    text-align: center;
+    /* text-align: center; */
 
     .a11y_input_wrapper {
         position: relative;
 
         input {
-            border: 1px solid #c8c8c8;
-            padding-right: 40px;
-            border-radius: 3px;
+            border: em(1px) solid #c8c8c8;
+            padding-right: em(40px);
+            border-radius: em(3px);
             color: #000;
             font-weight: normal;
             font-size: 1rem;
@@ -32,9 +32,9 @@
 
         .icon_magnifying_glass {
             position: absolute;
-            width: 40px !important;
-            height: 22px;
-            top: 8px;
+            width: em(40px) !important;
+            height: em(22px);
+            top: em(8px);
             left: 0;
             font-weight: 300;
             line-height: 0;
@@ -43,14 +43,14 @@
 
         .suggestionbox_clear_btn {
             position: absolute;
-            width: 34px !important;
-            height: 34px !important;
-            border-radius: 3px;
+            width: em(15px) !important;
+            height: em(15px) !important;
+            border-radius: em(3px);
             padding: 0;
             background-color: #fff;
             font-size: 1.3rem;
-            top: 2px;
-            right: 1px;
+            top: em(33px);
+            right: em(10px);
             line-height: 0;
             color: #ccc;
             z-index: 0;
@@ -64,7 +64,7 @@
 
         .autocomplete-suggestions {
             border: 1px solid #c8c8c8;
-            border-radius: 3px;
+            border-radius: em(3px);
             background: #fff;
             cursor: default;
             overflow: auto;
@@ -79,7 +79,7 @@
         }
 
         .autocomplete-suggestion {
-            padding: 5px 10px;
+            padding: em(5px) em(10px);
             overflow: hidden;
         }
 
@@ -99,7 +99,7 @@
             li,
             div {
                 list-style-type: none;
-                border-bottom: 1px solid #ccc;
+                border-bottom: em(1px) solid #ccc;
                 font-weight: normal;
             }
 
@@ -126,14 +126,14 @@
             li {
                 &:focus,
                 &.highligt:focus {
-                    border: 1px solid #000;
+                    border: em(1px) solid #000;
                 }
             }
 
             div {
                 &:focus,
                 &.highligt:focus {
-                    border: 1px solid #000;
+                    border: em(1px) solid #000;
                 }
             }
         }
