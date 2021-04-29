@@ -19,10 +19,10 @@
 <body>
     <div class="jumbotron">
         <div class="container">
-            <h1 class="display-3">A11yWrapper auto suggestion box</h1>
+            <h1 class="display-3">Auto suggestion box</h1>
             <p>
                 It's a JS based component which requires less coding and satisfy project need efficiently.
-                Create your own setting following the hooks provided by this component and point out the input box
+                Create your own setting by following the hooks provided from this component and point out the input box
                 which will act as Suggestion box and then Voila !!
             </p>
         </div>
@@ -46,10 +46,10 @@
                             <a class="nav-link active" href="#configuration">Configuration</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="#multiple_data_source">Different data source scenarios</a>
+                            <a class="nav-link active" href="#multiple_data_source">Various data source</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="#multiple">Multiple use of suggestion box</a>
+                            <a class="nav-link active" href="#multiple">Multiple use</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" href="#accessibility">Accessibility support</a>
@@ -117,7 +117,8 @@
         SRText: {
             instruction: "When autocomplete results are available use up and down arrows to review and enter to select.  Touch device users, explore by touch or with swipe gestures.",
             announceCount: "%number% suggestions found. Use up and down arrows to navigate",
-            suggestionBoxLabel: "List of suggestions"
+            suggestionBoxLabel: "List of suggestions",
+            closeBtn: "Close button"
         }
     };
 
@@ -150,102 +151,106 @@
                         All sort of customization need to be passed as an Object. Following are the available settings which can be customized
                     </p>
                     
-                    <table class="table table-bordered">
-                        <thead class="thead-inverse">
-                            <tr>
-                                <th>Key name</th>
-                                <th>Type</th>
-                                <th>Value</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>dataCanvas</td>
-                                <td>Object</td>
-                                <td>
-                                    This is a data source object and it contains three keys
-                                    <ul>
-                                        <li>
-                                            <strong>source</strong> - This is a required key and accepts 
-                                            <ul>
-                                                <li><strong>string</strong> - Only URL type string is allowed. If URL is passed then library will make a service call and fetch result</li>
-                                                <li><strong>array</strong> - plain array with any sort of items or an array of objects.</li>
-                                            </ul>
-                                            
-                                        </li>
-                                        <li>
-                                            <strong>hooks</strong> - This is an optional key and will be effective if <strong>source</strong> key holds array of 
-                                            objects. For an example, if developer wants to retrieve other keys from the object related to searched result,
-                                            then they have to mention the key names inside an array and pass it to <strong>hooks</strong> key.
-                                        </li>
-                                        <li>
-                                            <strong>displayKeyName</strong> - This key becomes mandatory if <strong>source</strong> key holds array of objects.
-                                            Developer needs to pass the specific key name which will be used to make the suggestion list. Please make sure this key exist on first level and not nested
-                                        </li>
-                                    </ul>
-                                    Checkout the multiple data source scenarios <a href="#multiple_data_source">here</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>minimumType</td>
-                                <td>Integer. No fraction allowed</td>
-                                <td>Determines how many characters need to be typed before showing the result. Default is 2</td>
-                            </tr>
-                            <tr>
-                                <td>noOfItems</td>
-                                <td>Integer. No fraction allowed</td>
-                                <td>Determines number of items to be shown inside the suggestion list. Default is 10</td>
-                            </tr>
-                            <tr>
-                                <td>searchType</td>
-                                <td>String</td>
-                                <td>
-                                    Determins the search type. Available values are
-                                    <ul>
-                                        <li><strong>contains</strong> - Empty string will be consider as "contains". This is a Default value.</li>
-                                        <li><strong>start</strong> - String starts with the typed value inside input box</li>
-                                        <li><strong>end</strong> - String ends with typed value inside input box</li>
-                                    </ul>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>SRText</td>
-                                <td>Object</td>
-                                <td>
-                                    This is mainly a screen reader content object and it contains three keys
-                                    <ul>
-                                        <li><strong>instruction</strong> - This is String type and define instruction on about how to use the Suggestion box</li>
-                                        <li><strong>announceCount</strong> - This is String type and defines number of available suggestions at run time</li>
-                                        <li><strong>suggestionBoxLabel</strong> - This is String type and place before suggestion box as Label.</li>
-                                    </ul>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>onItemSelected</td>
-                                <td>Function</td>
-                                <td>
-                                    This is a callback function and triggers when any item from the suggestion list is selected. 
-                                    It returns an object with key-value pair. 
-                                    If <strong>source</strong> key holds array of objects then return object will contain selected value and 
-                                    <strong>hooks</strong> value
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>onFocusIn</td>
-                                <td>Function</td>
-                                <td>
-                                    This is a callback function and triggers when suggestion box gain focus and return current value from the input box
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>onFocusOut</td>
-                                <td>Function</td>
-                                <td>
-                                    This is a callback function and triggers when suggestion box loose focus and return value from the input box
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead class="thead-inverse">
+                                <tr>
+                                    <th>Key name</th>
+                                    <th>Type</th>
+                                    <th>Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>dataCanvas</td>
+                                    <td>Object</td>
+                                    <td>
+                                        This is a data source object and it contains three keys
+                                        <ul>
+                                            <li>
+                                                <strong>source</strong> - This is a required key and accepts 
+                                                <ul>
+                                                    <li><strong>string</strong> - Only URL type string is allowed. If URL is passed then library will make a service call and fetch result</li>
+                                                    <li><strong>array</strong> - plain array with any sort of items or an array of objects.</li>
+                                                </ul>
+                                                
+                                            </li>
+                                            <li>
+                                                <strong>hooks</strong> - This is an optional key and will be effective if <strong>source</strong> key holds array of 
+                                                objects. For an example, if developer wants to retrieve other keys from the object related to searched result,
+                                                then they have to mention the key names inside an array and pass it to <strong>hooks</strong> key.
+                                            </li>
+                                            <li>
+                                                <strong>displayKeyName</strong> - This key becomes mandatory if <strong>source</strong> key holds array of objects.
+                                                Developer needs to pass the specific key name which will be used to make the suggestion list. Please make sure this key exist on first level and not nested
+                                            </li>
+                                        </ul>
+                                        Checkout the multiple data source scenarios <a href="#multiple_data_source">here</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>minimumType</td>
+                                    <td>Integer. No fraction allowed</td>
+                                    <td>Determines how many characters need to be typed before showing the result. Default is 2</td>
+                                </tr>
+                                <tr>
+                                    <td>noOfItems</td>
+                                    <td>Integer. No fraction allowed</td>
+                                    <td>Determines number of items to be shown inside the suggestion list. Default is 10</td>
+                                </tr>
+                                <tr>
+                                    <td>searchType</td>
+                                    <td>String</td>
+                                    <td>
+                                        Determins the search type. Available values are
+                                        <ul>
+                                            <li><strong>contains</strong> - Empty string will be consider as "contains". This is a Default value.</li>
+                                            <li><strong>start</strong> - String starts with the typed value inside input box</li>
+                                            <li><strong>end</strong> - String ends with typed value inside input box</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>SRText</td>
+                                    <td>Object</td>
+                                    <td>
+                                        This is mainly a screen reader content object and it contains three keys
+                                        <ul>
+                                            <li><strong>instruction</strong> - This is String type and define instruction on about how to use the Suggestion box</li>
+                                            <li><strong>announceCount</strong> - This is String type and defines number of available suggestions at run time</li>
+                                            <li><strong>suggestionBoxLabel</strong> - This is String type and place before suggestion box as Label.</li>
+                                            <li><strong>closeBtn</strong> - This is String type and screen reader content for close button.</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>onItemSelected</td>
+                                    <td>Function</td>
+                                    <td>
+                                        This is a callback function and triggers when any item from the suggestion list is selected. 
+                                        It returns an object with key-value pair. 
+                                        If <strong>source</strong> key holds array of objects then return object will contain selected value and 
+                                        <strong>hooks</strong> value
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>onFocusIn</td>
+                                    <td>Function</td>
+                                    <td>
+                                        This is a callback function and triggers when suggestion box gain focus and return current value from the input box
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>onFocusOut</td>
+                                    <td>Function</td>
+                                    <td>
+                                        This is a callback function and triggers when suggestion box loose focus and return value from the input box
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
                 </div>
 
                 <div id="multiple_data_source">
@@ -292,7 +297,8 @@
             SRText: {
                 instruction: "When autocomplete results are available use up and down arrows to review and enter to select.  Touch device users, explore by touch or with swipe gestures.",
                 announceCount: "%number% suggestions found. Use up and down arrows to navigate",
-                suggestionBoxLabel: "List of suggestions"
+                suggestionBoxLabel: "List of suggestions",
+                closeBtn: "Close button"
             },
             onItemSelected: function (data) {
                 console.log('Selected Item: ', data);
@@ -498,7 +504,8 @@
             SRText: {
                 instruction: "When autocomplete results are available use up and down arrows to review and enter to select.  Touch device users, explore by touch or with swipe gestures.",
                 announceCount: "%number% suggestions found. Use up and down arrows to navigate",
-                suggestionBoxLabel: "List of suggestions"
+                suggestionBoxLabel: "List of suggestions",
+                closeBtn: "Close button"
             },
             onItemSelected: function (data) {
                 console.log('Selected Item: ', data);

@@ -115,68 +115,71 @@
                         All sort of customization need to be passed as an Object.
                         Slider settings can be customized by altering few attributes like
                     </p>
-                    <table class="table table-bordered">
-                        <thead class="thead-inverse">
-                            <tr>
-                                <th>Key name</th>
-                                <th>Type</th>
-                                <th>Value</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>id</td>
-                                <td>String</td>
-                                <td>It's a required attribute and necessary to follow accessibility
-                                    guideline. This should be unique and </td>
-                            </tr>
-                            <tr>
-                                <td>min</td>
-                                <td>Integer. No fraction allowed</td>
-                                <td>Determine minimum value to start with. Default is O</td>
-                            </tr>
-                            <tr>
-                                <td>max</td>
-                                <td>Integer. No fraction allowed</td>
-                                <td>Determine the maximum value Slider will hold. Default is 100</td>
-                            </tr>
-                            <tr>
-                                <td>now</td>
-                                <td>Integer. No fraction allowed</td>
-                                <td>Set initial value in Slider. Default is 0</td>
-                            </tr>
-                            <tr>
-                                <td>stepper</td>
-                                <td>Integer. No fraction allowed</td>
-                                <td>Set the jump count of Slider. This is necessary for PAGE UP and PAGE DOWN keys.
-                                    For an example - If stepped is set to 10 then pressing PAGE UP will increment slider value by 10.
-                                    Default is 10</td>
-                            </tr>                            
-                            <tr>
-                                <td>label</td>
-                                <td>String</td>
-                                <td>Label stating purpose of Slider. This is a required key. Passing empty string
-                                    will display default string from Library which is 'Slider'
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>output</td>
-                                <td>String</td>
-                                <td>Pass the reference (ID or Class) of a container where result would display when
-                                    slider
-                                    moves</td>
-                            </tr>
-                            <tr>
-                                <td>onSliderChange</td>
-                                <td>Function</td>
-                                <td>This is a callback function and triggers whenever Slider moves. It always returns
-                                    Slider
-                                    value
-                                    after movement.
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead class="thead-inverse">
+                                <tr>
+                                    <th>Key name</th>
+                                    <th>Type</th>
+                                    <th>Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>String</td>
+                                    <td>It's a required attribute and necessary to follow accessibility
+                                        guideline. This should be unique and </td>
+                                </tr>
+                                <tr>
+                                    <td>min</td>
+                                    <td>Integer. No fraction allowed</td>
+                                    <td>Determine minimum value to start with. Default is O</td>
+                                </tr>
+                                <tr>
+                                    <td>max</td>
+                                    <td>Integer. No fraction allowed</td>
+                                    <td>Determine the maximum value Slider will hold. Default is 100</td>
+                                </tr>
+                                <tr>
+                                    <td>now</td>
+                                    <td>Integer. No fraction allowed</td>
+                                    <td>Set initial value in Slider. Default is 0</td>
+                                </tr>
+                                <tr>
+                                    <td>stepper</td>
+                                    <td>Integer. No fraction allowed</td>
+                                    <td>Set the jump count of Slider. This is necessary for PAGE UP and PAGE DOWN keys.
+                                        For an example - If stepped is set to 10 then pressing PAGE UP will increment slider value by 10.
+                                        Default is 10</td>
+                                </tr>                            
+                                <tr>
+                                    <td>label</td>
+                                    <td>String</td>
+                                    <td>Label stating purpose of Slider. This is a required key. Passing empty string
+                                        will display default string from Library which is 'Slider'
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>output</td>
+                                    <td>String</td>
+                                    <td>Pass the reference (ID or Class) of a container where result would display when
+                                        slider
+                                        moves</td>
+                                </tr>
+                                <tr>
+                                    <td>onSliderChange</td>
+                                    <td>Function</td>
+                                    <td>This is a callback function and triggers whenever Slider moves. It always returns
+                                        Slider
+                                        value
+                                        after movement.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>                    
 
     <pre>
     <code>
@@ -220,33 +223,15 @@
                     </p>
                     <ul>
                         <li>
-                            Using multiple ID.
+                            <strong>Using multiple ID.</strong>
                             <p class="mt-3">
                                 Call wrapper class multiple times for each distinctive ID.
                             </p>
     <pre>
     <code>
     <span>
-    var sliderOption1 = {
-        min: 0,
-        max: 255,
-        now: 50,
-        label: 'Demo slider',
-        output: '#sliderVal',
-        onSliderChange: function (data) {
-            console.log('Selected Item: ', data);
-        }
-    },
-    sliderOption2 = {
-        min: 0,
-        max: 255,
-        now: 50,
-        label: 'Demo slider',
-        output: '#sliderVal',
-        onSliderChange: function (data) {
-            console.log('Selected Item: ', data);
-        }
-    },
+    var sliderOption1 = {...},
+    sliderOption2 = {...},
 
     window.addEventListener('load', function () {
         window.A11yWrapper('#id_1').slider(sliderOption1);
@@ -257,7 +242,7 @@
     </pre>
                         </li>
                         <li>
-                            Using same class for multiple elements.
+                            <strong>Using same class for multiple elements.</strong>
                             <p class="mt-3">
                                 In below example, configuration object will be assigned sequentially. First object
                                 will be assigned to first Slider and second object will be assigned to second Slider.
@@ -267,26 +252,8 @@
     <pre>
     <code>
     <span>
-    var sliderOption1 = {
-        min: 0,
-        max: 255,
-        now: 50,
-        label: 'Demo slider',
-        output: '#sliderVal',
-        onSliderChange: function (data) {
-            console.log('Selected Item: ', data);
-        }
-    },
-    sliderOption2 = {
-        min: 0,
-        max: 255,
-        now: 50,
-        label: 'Demo slider',
-        output: '#sliderVal',
-        onSliderChange: function (data) {
-            console.log('Selected Item: ', data);
-        }
-    },
+    var sliderOption1 = {...},
+        sliderOption2 = {...},
 
     window.addEventListener('load', function () {
         window.A11yWrapper('.slider-class').slider(sliderOption1, sliderOption2);

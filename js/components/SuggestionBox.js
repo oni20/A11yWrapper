@@ -91,7 +91,7 @@ A11ySuggestionBox.prototype.createClearButton = function () {
   clearButton.setAttribute('id', suggestionBoxID + '_clear_search_btn')
   clearButton.setAttribute('type', 'button');
   clearButton.style.display = 'none';
-  clearButton.innerHTML = '<span class="sr-only">Clear Fund Name, fund code or ticker symbol</span>X';
+  clearButton.innerHTML = '<span class="sr-only">'+ context.SRText.closeBtn +'</span>X';
   clearButton.classList.add('btn', 'suggestionbox_clear_btn');
   context.suggestionBox.parentElement.insertBefore(clearButton, context.suggestionBox.nextSibling);
 

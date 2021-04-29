@@ -1,6 +1,7 @@
 import A11yCarousel from "./components/Carousel";
 import A11ySuggestionBox from "./components/SuggestionBox";
 import A11ySlider from "./components/Slider";
+import A11yProgressStepper from "./components/ProgressStepper";
 
 // Plugin Configuration
 var _A11yWrapper = function (selector) {
@@ -28,6 +29,14 @@ _A11yWrapper.prototype = {
             );
         });
     },
+    progress: function (...settings) {
+        this.node.forEach((node, index) => {
+            return new A11yProgressStepper(
+                node,
+                settings[index] === undefined ? settings[0] : settings[index]
+            );
+        });
+    }
 };
 
 // export to global namespace
