@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+        integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="dist/css/SourcePage.css" />
+    <link rel="stylesheet" href="dist/css/A11yWrapper.css" />
+
+    <title>Accessible and Responsive Progress stepper</title>
+</head>
+
+<body>
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="display-3">Progress stepper</h1>
+            <p>
+                It's a JS based component which requires less coding and satisfy project need efficiently. Adjust few settings by yourself and
+                check the beauty of this component. This component totally supports accessibility and all necessary code get generated on the fly
+            </p>
+        </div>
+    </div>
+    <div class="container" role="main">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Progress stepper</li>
+            </ol>
+        </nav>
+        
+        <div class="row mt-4">
+            <nav class="col-md-3 d-none d-md-block bg-light sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#init">Initial setup</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#configuration">Configuration</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#multiple">Multiple use</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#accessibility">Accessibility support</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <div class="col-sm-12 col-md-9">
+                <h2>Demo</h2>
+
+                <div id="progress_container" class='progress-container mb-4'></div>
+                
+                <div id="init" style="margin-top: 10%;">
+                    <h2>Initial setup</h2>
+                    <p>
+                        Create any div or section with a specific ID or class. Then mention the element to the wrapper class.
+                        For an example check below code snippet.
+                    </p>
+
+    <pre>
+    <code>
+    <span>
+    &lt;div class='progress_container'&gt;&lt;/div&gt;
+    </span>
+    </code>
+    </pre>
+
+                </div>
+
+                <div id="configuration">
+                    <h2>Configuration</h2>
+                    <p>
+                        All sort of customization need to be passed as an Object. Following are the available settings which can be customized
+                    </p>
+                    
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead class="thead-inverse">
+                                <tr>
+                                    <th>Key name</th>
+                                    <th>Type</th>
+                                    <th>Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>data</td>
+                                    <td>Array of objects</td>
+                                    <td>
+                                        This key expects an object as item of array. That object contains following keys
+                                        <ul>
+                                            <li>
+                                                <strong>name</strong> - This is a required key and accept string only. This field determines the display name of step
+                                            </li>
+                                            <li>
+                                                <strong>status</strong> - This is a required key and accept string only. Available status are
+                                                <ul>
+                                                    <li><strong>active</strong> - To show active or current step</li>
+                                                    <li><strong>error</strong> - To show errorneous step</li>
+                                                    <li><strong>success</strong> -  To show successfully completed step</li>
+                                                </ul>                                            
+                                            </li>
+                                            <li>
+                                                <strong>link</strong> - This key is optional and accept string or URL to another page.
+                                                Step name will only appear as link if this key is declared inside configuration object and valid string is passed.
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>SRText</td>
+                                    <td>Object</td>
+                                    <td>
+                                        This object collects content for screen reader. All the keys inside the object are required and accept string only
+                                        <ul>
+                                            <li><strong>currentStepInfo</strong> - Reads the current step description</li>
+                                            <li><strong>error</strong> - Read more about error step</li>
+                                            <li><strong>success</strong> -  Read more about completed step</li>
+                                            <li><strong>active</strong> -  Read about active step</li>
+                                        </ul>
+                                    </td>
+                                </tr>                            
+                            </tbody>
+                        </table>
+                    </div>                    
+                </div>
+
+                <div id="multiple">
+                    <h2>How to use Progress stepper component multiple times</h2>
+                    <div class="mt-5 mb-5">
+                        <div class='multi-progress-stepper'></div>
+                        <div class='multi-progress-stepper'></div>
+                    </div>
+                    
+                    <p class="pt-4">
+                        Progress stepper can be positioned in multiple places while initiating the library. 
+                        Also, multiple stepper can have different configurations as well. Below two ways, stepper can be called several times.
+                    </p>
+
+                    <ul>
+                        <li>
+                            <strong>Using multiple ID</strong>
+                            <p class="mt-3">
+                                Call wrapper class multiple times for each distinctive ID.
+    <pre>
+    <code>
+    <span>
+    var progressOption1 = {...},
+        progressOption2 = {...},
+
+    window.addEventListener('load', function () {
+        window.A11yWrapper('#progress_container1').progress(progressOption1);
+        window.A11yWrapper('#progress_container2').progress(progressOption2);
+    });
+    </span>
+    </code>
+    </pre>                                
+                            </p>
+                        </li>
+                        <li>
+                            <strong>Using same class for multiple elements.</strong>
+                            <p class="mt-3">
+                                In below example, configuration object will be assigned sequentially. First object
+                                will be assigned to first Stepper and second object will be assigned to the second Stepper.
+                                If only one configuration object is passed then both Stepper will be built upon that single
+                                configuration object.
+    <pre>
+    <code>
+    <span>
+    var progressOption1 = {...},
+        progressOption2 = {...},
+
+    window.addEventListener('load', function () {
+        window.A11yWrapper('.multiple-progress').progress(progressOption1, progressOption2);
+    });
+    </span>
+    </code>
+    </pre>                                 
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+
+                <div id="accessibility">
+                    <h2>Accessibility support</h2>
+                    <p class="lead mt-3">Keyboard interaction</p>
+                    <ul>
+                        <li>
+                            <strong>ESC</strong> - ESC key press will close the suggestion box and Input box will gain focus
+                        </li>
+                        <li>
+                            <strong>TAB</strong> - Press TAB to focus the input box. Pressing TAB again would move focus to Cross (X) icon
+                        </li>
+                        <li>
+                            <strong>RETURN/ ENTER</strong> - Pressing Enter will select the item from suggeion list
+                        </li>
+                        <li>
+                            <strong>UP or DOWN arrow</strong> - Use these keys to navigate between suggestion list items
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+        <button type="button" class="btn btn-default scroll-top" aria-label="Go to Top" id="scroll_top"
+            onclick="topFunction()">
+            <span class="" aria-hidden="true">Top</span>
+        </button>
+
+        <footer>
+            <p>
+                © 2021 <a href="https://www.linkedin.com/in/md-asif-ahmed-oni-57271673/">Md Asif Ahmed Oni</a> / A11yWrapper. |
+                Check the project in <a href="https://github.com/oni20/A11yWrapper" target="_blank">GitHub</a> |
+                Licensed under the MIT license.
+            </p>
+        </footer>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+        integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+        integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
+        integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+        crossorigin="anonymous"></script>
+
+    <script src="dist/js/A11yWrapper.min.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        var mybutton = document.getElementById("scroll_top");
+
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function () { scrollFunction() };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+
+        // When the user clicks on the button, scroll to the top of the document
+        function topFunction() {
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        }
+    </script>
+
+    <script type="text/javascript">
+        var progressOption = {
+            data: [
+                {
+                    name: 'Delivery',
+                    status: 'success',
+                    link: ""
+                },
+                {
+                    name: 'Payment',
+                    status: 'error',
+                    link: "#"
+                },
+                {
+                    name: 'Confirmation',
+                    status: 'success'
+                },
+                {
+                    name: 'Review',
+                    status: 'error',
+                    link: "#"
+                },
+                {
+                    name: 'Shipping purchase',
+                    status: 'active'
+                }
+            ],
+            SRText:{
+                currentStepInfo: "You are currently on Confirmation step",
+                error: "Error",
+                success: "Completed",
+                active: "Current"
+            }
+        },
+        multiProgressOption1 = {
+            data: [
+                {
+                    name: 'Delivery',
+                    status: 'success',
+                    link: "#"
+                },
+                {
+                    name: 'Payment',
+                    status: 'active',
+                    link: ""
+                },
+                {
+                    name: 'Confirmation',
+                    status: ''
+                }
+            ],
+            SRText:{
+                currentStepInfo: "You are currently on Confirmation step",
+                error: "Error",
+                success: "Completed",
+                active: "Current"
+            }
+        },
+        multiProgressOption2 = {
+            data: [
+                {
+                    name: 'Step 1',
+                    status: 'error',
+                    link: ""
+                },
+                {
+                    name: 'Step 2',
+                    status: 'error',
+                    link: "#"
+                },
+                {
+                    name: 'Step 3',
+                    status: 'success',
+                    link: "#"
+                },
+                {
+                    name: 'Step 4',
+                    status: 'active'
+                },
+                {
+                    name: 'Final step',
+                    status: ''
+                }
+            ],
+            SRText:{
+                currentStepInfo: "You are currently on Confirmation step",
+                error: "Error",
+                success: "Completed",
+                active: "Current"
+            }
+        }
+        
+        window.addEventListener('load', function () {
+            window.A11yWrapper('#progress_container').progress(progressOption);
+            window.A11yWrapper('.multi-progress-stepper').progress(multiProgressOption1, multiProgressOption2);
+        });
+    </script>
+</body>
+
+</html>
