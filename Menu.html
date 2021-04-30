@@ -13,16 +13,16 @@
     <link rel="stylesheet" href="dist/css/SourcePage.css" />
     <link rel="stylesheet" href="dist/css/A11yWrapper.css" />
 
-    <title>Accessible and Responsive slider</title>
+    <title>Accessible and Responsive Menu</title>
 </head>
 
 <body>
     <div class="jumbotron">
         <div class="container">
-            <h1 class="display-3">Slider</h1>
+            <h1 class="display-3">Menu</h1>
             <p>
-                This slider is purely built on JavaScript and fully customizable. Developer needs to
-                call the wrapper class and show container where slider will be created on the fly.
+                This menu is purely built on JavaScript and fully customizable. Developer needs to
+                call the wrapper class and show container where menu will be created on the fly. This menu can have submenus displayed as dropdown.
             </p>
         </div>
     </div>
@@ -31,7 +31,7 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Slider</li>
+                <li class="breadcrumb-item active" aria-current="page">Menu</li>
             </ol>
         </nav>
 
@@ -57,9 +57,31 @@
 
             <div class="col-sm-12 col-md-9">
                 <h2>Demo</h2>
-                <div id="idSliders1" class='slider-container'></div>
+                
+                <nav role="presentation" aria-label="Main Navigation" class="fly-out-menu">
+                    <a class="brand-logo" href="#">Navbar</a>
+                                        
+                    <ul id='menu_item' class="collapse">
+                        <li><a href="#">Item 1</a></li>
+                        <li><a href="#">Item 1</a></li>
+                        <li class="has-submenu">
+                            <a href="#" aria-expanded="false" aria-haspopup="true">Item 3 (Sub)</a>
+                            <ul>
+                                <li><a href="#">Space Bear 6</a></li>
+                                <li><a href="#">Space Bear 6 Plus</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Item 4</a></li>
+                        <li><a href="#">Item 5</a></li>
+                    </ul>
 
-                <div id="sliderVal" class="value mt-2">0</div>
+                    <button class="toggle-button" type="button" aria-controls="menu_item" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <div class="bar1"></div>
+                        <div class="bar2"></div>
+                        <div class="bar3"></div>
+                    </button>
+                </nav>
 
                 <div id="init" class="mt-5">
                     <h2>Initial setup</h2>
@@ -68,45 +90,6 @@
                         fine.
                         Call the slider component from Wrapper library and Slider
                     </p>
-
-    <pre>
-    <code>
-    <span>
-        &lt;div id="sliderID" class='slider-class'&gt;&lt;/div&gt;
-    </span>
-    </code>
-    </pre>
-
-                    <p>
-                        Call the slider component from Wrapper library at initial Load event. It can be
-                        <strong>$(document).ready(...)</strong> or <strong>Window.onload</strong> or 
-                        <strong>Window.eventListener('load', ...)</strong>. Then slider will
-                        load with default settings.
-                        <strong>
-                            Check out how to add <a href="#multiple">multiple</a> sliders on the page
-                        </strong>
-                    </p>
-
-    <pre>
-    <code>
-    <span>
-        // JavaScript Users - Class name for Multiple slider 
-        window.addEventListener('load', function () {
-            window.A11yWrapper('.slider-class').slider();
-        });
-
-        // JavaScript Users - ID name for one single slider 
-        window.addEventListener('load', function () {
-            window.A11yWrapper('#sliderID').slider();
-        });
-
-        //jQuery Users
-        $( document ).ready(function() {
-            window.A11yWrapper('#sliderID').slider();
-        });
-    </span>
-    </code>
-    </pre>
                 </div>
 
                 <div id="configuration">
@@ -206,16 +189,6 @@
 
                 <div id="multiple">
                     <h2>How to use Slider component multiple times</h2>
-                    
-                    <div class="mt-2 mb-1">
-                        <div class='multi-slider-container'></div>
-                        <div id="sliderValMulti1" class="value mt-2">0</div>
-                    </div>
-
-                    <div class="mb-1">
-                        <div class='multi-slider-container'></div>
-                        <div id="sliderValMulti2" class="value mt-2">0</div>
-                    </div>
                     
                     <p>
                         Slider can be positioned in multiple places while initiating the library. Also, multiple slider
@@ -331,7 +304,7 @@
     </script>
 
     <script type="text/javascript">
-        var sliderOption = {
+        var menuOption = {
             id:'slider_1',
             min: 0,
             max: 255,
@@ -344,33 +317,9 @@
             }
         };
 
-        var multiSliderOption1 = {
-            id:'slider_2',
-            min: 0,
-            max: 100,
-            now: 10,
-            label: 'Multi Slider 1',
-            output: '#sliderValMulti1',
-            onSliderChange: function (data) {
-                console.log('Selected Item: ', data);
-            }
-        },
-            multiSliderOption2 = {
-                id:'slider_3',
-                min: 0,
-                max: 255,
-                now: 50,
-                label: 'Multi Slider 2',
-                output: '#sliderValMulti2',
-                onSliderChange: function (data) {
-                    console.log('Selected Item: ', data);
-                }
-            };
-
-        window.addEventListener('load', function () {
-            window.A11yWrapper('#idSliders1').slider(sliderOption);
-            window.A11yWrapper('.multi-slider-container').slider(multiSliderOption1, multiSliderOption2);
-        });
+        /* window.addEventListener('load', function () {
+            window.A11yWrapper('.multi-slider-container').menu(menuOption);
+        }); */
 
     </script>
 </body>

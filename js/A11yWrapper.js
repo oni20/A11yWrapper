@@ -2,6 +2,7 @@ import A11yCarousel from "./components/Carousel";
 import A11ySuggestionBox from "./components/SuggestionBox";
 import A11ySlider from "./components/Slider";
 import A11yProgressStepper from "./components/ProgressStepper";
+import A11yMenu from "./components/Menu";
 
 // Plugin Configuration
 var _A11yWrapper = function (selector) {
@@ -36,7 +37,15 @@ _A11yWrapper.prototype = {
                 settings[index] === undefined ? settings[0] : settings[index]
             );
         });
-    }
+    },
+    menu: function (...settings) {
+        this.node.forEach((node, index) => {
+            return new A11yMenu(
+                node,
+                settings[index] === undefined ? settings[0] : settings[index]
+            );
+        });
+    }    
 };
 
 // export to global namespace
