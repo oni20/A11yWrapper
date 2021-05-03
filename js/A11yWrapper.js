@@ -2,6 +2,8 @@ import A11yCarousel from "./components/Carousel";
 import A11ySuggestionBox from "./components/SuggestionBox";
 import A11ySlider from "./components/Slider";
 import A11yProgressStepper from "./components/ProgressStepper";
+import A11yMenu from "./components/Menu";
+import A11yMegaMenu from "./components/MegaMenu";
 
 // Plugin Configuration
 var _A11yWrapper = function (selector) {
@@ -32,6 +34,22 @@ _A11yWrapper.prototype = {
     progress: function (...settings) {
         this.node.forEach((node, index) => {
             return new A11yProgressStepper(
+                node,
+                settings[index] === undefined ? settings[0] : settings[index]
+            );
+        });
+    },
+    menu: function (...settings) {
+        this.node.forEach((node, index) => {
+            return new A11yMenu(
+                node,
+                settings[index] === undefined ? settings[0] : settings[index]
+            );
+        });
+    },
+    megamenu: function (...settings) {
+        this.node.forEach((node, index) => {
+            return new A11yMegaMenu(
                 node,
                 settings[index] === undefined ? settings[0] : settings[index]
             );

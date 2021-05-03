@@ -1,0 +1,188 @@
+@import "helper.scss";
+@import "flexbox.scss";
+
+$blue: #6d62f9;
+
+.fly-out-menu {
+    background-color: #eceeef;
+    padding: 0 em(15px);
+
+    @include flexbox();
+    @include align-items(center);
+
+    .brand-logo {
+        font-size: rem(20px);
+    }
+    > ul {
+        margin: 0;
+        width: 100%;
+
+        @include flexbox();
+        @include flex-direction(row);
+        @include justify-content(space-around);
+
+        > li {
+            list-style: none;
+            text-align: center;
+            position: relative;
+            @include flex(1);
+
+            > ul {
+                display: none;
+                @include flex-direction(column);
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: 100%;
+                padding: 0;
+                margin: 0;
+                background-color: white;
+                border: 1px solid rgba(0, 0, 0, 0.15);
+
+                > li {
+                    list-style: none;
+                }
+                a {
+                    border-bottom-width: 1px;
+                }
+            }
+
+            &.has-submenu {
+                > a {
+                    &::after {
+                        display: inline-block;
+                        width: 0;
+                        height: 0;
+                        margin-left: 0.255em;
+                        vertical-align: 0.255em;
+                        content: "";
+                        border-top: 0.3em solid;
+                        border-right: 0.3em solid transparent;
+                        border-bottom: 0;
+                        border-left: 0.3em solid transparent;
+                    }
+                }
+            }
+            &.open {
+                > ul {
+                    @include flexbox();
+                }
+            }
+        }
+    }
+    ul a {
+        display: block;
+        padding: em(16px);
+        border-color: #e8e8e8;
+        color: rgba(0, 0, 0, 0.9);
+        text-decoration: none;
+
+        &:hover,
+        &:focus {
+            background-color: white;
+            color: rgba(0, 0, 0, 0.9);
+            border: 1px solid #036;
+            text-decoration: underline;
+        }
+    }
+    .current {
+        display: block;
+        padding: 0.25em;
+        border-color: #e8e8e8;
+        background-color: #bbb;
+        color: #000;
+        border-color: #444;
+    }
+
+    .toggle-button {
+        display: none;
+        cursor: pointer;
+
+        .bar1,
+        .bar2,
+        .bar3 {
+            width: em(25px);
+            height: em(2px);
+            background-color: #333;
+            margin: em(6px) 0;
+            transition: 0.4s;
+        }
+    }
+    .change {
+        padding-top: em(5px);
+
+        .bar1 {
+            -webkit-transform: rotate(-45deg) translate(em(-4px), em(3px));
+            -webkit-transform: rotate(-45deg) translate(em(-4px), em(3px));
+            -moz-transform: rotate(-45deg) translate(em(-4px), em(3px));
+            -ms-transform: rotate(-45deg) translate(em(-4px), em(3px));
+            -o-transform: rotate(-45deg) translate(em(-4px), em(3px));
+            transform: rotate(-45deg) translate(em(-4px), em(3px));
+        }
+
+        .bar2 {
+            opacity: 0;
+        }
+
+        .bar3 {
+            -webkit-transform: rotate(45deg) translate(em(-8px), em(-8px));
+            -webkit-transform: rotate(45deg) translate(em(-8px), em(-8px));
+            -moz-transform: rotate(45deg) translate(em(-8px), em(-8px));
+            -ms-transform: rotate(45deg) translate(em(-8px), em(-8px));
+            -o-transform: rotate(45deg) translate(em(-8px), em(-8px));
+            transform: rotate(45deg) translate(em(-8px), em(-8px));
+        }
+    }
+
+    @media only screen and (max-width: 768px) {
+        /* For mobile phones: */
+
+        display: block;
+        position: relative;
+        padding: em(20px);
+
+        .collapse {
+            display: none;
+        }
+
+        .show {
+            @include flexbox();
+            @include animation(scale-display 0.3s);
+
+            @include keyframes(scale-display) {
+                0% {
+                    opacity: 0;
+                    transform: scale(0);
+                    -webkit-transform: scale(0);
+                }
+
+                100% {
+                    opacity: 1;
+                    transform: scale(1);
+                    -webkit-transform: scale(1);
+                }
+            }
+        }
+
+        > ul {
+            padding-left: 0px;
+            @include flex-direction(column);
+            @include align-items(baseline);
+
+            > li {
+                &.open {
+                    > ul {
+                        position: inherit;
+                    }
+                }
+            }
+        }
+
+        .toggle-button {
+            display: inline-block;
+            position: absolute;
+            top: em(20px);
+            right: em(15px);
+        }
+    }
+}
