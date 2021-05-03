@@ -3,9 +3,6 @@ function A11yProgressStepper(element, options) {
   // Assign container
   this.progressStepperContainer = element;
 
-  // Initiate objects
-
-
   // Apply settings from Configuration object
   this.steps = options ? options.data || [] : [];
   this.SRText = options ? options.SRText || {} : {};
@@ -15,9 +12,6 @@ function A11yProgressStepper(element, options) {
     step: 'Step',
     of: 'of'
   }
-
-  // Register Utility class
-
 
   // Create Stepper
   if (this.steps.length > 0) {
