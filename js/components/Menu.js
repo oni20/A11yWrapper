@@ -47,7 +47,7 @@ function A11yMenu(navContainer, options) {
 A11yMenu.prototype.createMenu = function () {
   let context = this,
     brandLogo = context.brandLogo ? `<a class="brand-logo" href="${context.brandLogo.link}">${context.brandLogo.content}</a>` : '',
-    buildMenu = `<ul role="menubar" aria-label="${context.mainMenuLabelSRText}" id="menu_${context.menuID}" class="collapse">`;
+    buildMenu = `<ul role="menubar" aria-label="${context.mainMenuLabelSRText}" id="menu_${context.menuID}">`;
 
   context.menuList.map((menu, idx) => {
     let subMenu = ''
@@ -135,12 +135,15 @@ A11yMenu.prototype.eventHandlers = function () {
 
   // Toggle button for mobile view
   context.mobileToggleNavBtn.addEventListener('click', (event) => {
-    if (context.Utility._hasClass(event.currentTarget, 'change')) {
-      event.currentTarget.classList.remove('change');
-      context.menuBox.classList.remove('show');
+    let toggleBtn = event.currentTarget,
+        menuHeight = context.menuBox.getBoundingClientRect().height;
+
+    if (context.Utility._hasClass(toggleBtn, 'change')) {
+      toggleBtn.classList.remove('change');      
+      context.menuBox.closest('nav').style.removeProperty('height');
     } else {
-      event.currentTarget.classList.add('change');
-      context.menuBox.classList.add('show');
+      toggleBtn.classList.add('change');
+      context.menuBox.closest('nav').style.height = `${(menuHeight/16) + 4.0625}em`;
     }
   });
 

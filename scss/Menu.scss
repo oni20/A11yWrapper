@@ -140,29 +140,9 @@ $blue: #6d62f9;
         display: block;
         position: relative;
         padding: em(20px);
-
-        .collapse {
-            display: none;
-        }
-
-        .show {
-            @include flexbox();
-            @include animation(scale-display 0.3s);
-
-            @include keyframes(scale-display) {
-                0% {
-                    opacity: 0;
-                    transform: scale(0);
-                    -webkit-transform: scale(0);
-                }
-
-                100% {
-                    opacity: 1;
-                    transform: scale(1);
-                    -webkit-transform: scale(1);
-                }
-            }
-        }
+        height: em(70px);
+        overflow: hidden;
+        transition: height 0.35s ease;
 
         > ul {
             padding-left: 0px;
