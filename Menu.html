@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
         integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="dist/css/SourcePage.css" />
     <link rel="stylesheet" href="dist/css/A11yWrapper.css" />
 
@@ -77,7 +78,6 @@
     </span>
     </code>
     </pre>
-
                 <div id="configuration">
                     <h2>Configuration</h2>
                     <p>
@@ -100,7 +100,7 @@
                                     <td>String</td>
                                     <td>It's a required attribute and necessary to follow accessibility
                                         guideline. This should be unique</td>
-                                </tr>                                
+                                </tr>
                                 <tr>
                                     <td>mainMenuLabelSRText</td>
                                     <td>String</td>
@@ -111,14 +111,16 @@
                                 <tr>
                                     <td>brandLogo</td>
                                     <td>Object</td>
-                                    <td>This object holds setting for Brand logo which appears at the beginning of Menubar. This is a required key.
+                                    <td>This object holds setting for Brand logo which appears at the beginning of
+                                        Menubar. This is a required key.
                                         It has following keys inside.
                                         <ul>
                                             <li>
                                                 <strong>link</strong> - Pass URL for the logo
                                             </li>
                                             <li>
-                                                <strong>content</strong> - Text content of the logo. This key accepts HTML element as string as well. So brand image or icon can be passed.
+                                                <strong>content</strong> - Text content of the logo. This key accepts
+                                                HTML element as string as well. So brand image or icon can be passed.
                                             </li>
                                         </ul>
                                     </td>
@@ -126,18 +128,24 @@
                                 <tr>
                                     <td>menuList</td>
                                     <td>Array of Objects</td>
-                                    <td>This is a required key and holds information about menu items. Please note, Menu library support only one layer sub menu level.
-                                        For multi-layer, please refer to <a href="#">Mega menu (Under construction)</a> component. Each object contains following keys -
+                                    <td>This is a required key and holds information about menu items. Please note, Menu
+                                        library support only one layer sub menu level.
+                                        For multi-layer, please refer to <a href="#">Mega menu (Under construction)</a>
+                                        component. Each object contains following keys -
                                         <ul>
                                             <li>
-                                                <strong>name</strong> - This is a required key and accepts STRING only. Display text of menu item.
+                                                <strong>name</strong> - This is a required key and accepts STRING only.
+                                                Display text of menu item.
                                             </li>
                                             <li>
-                                                <strong>link</strong> - This is a required key and accepts STRING only. Link of menu item.
+                                                <strong>link</strong> - This is a required key and accepts STRING only.
+                                                Link of menu item.
                                             </li>
                                             <li>
-                                                <strong>subMenu</strong> - This is an optional key and mentioning this key will tell library to create sub menu 
-                                                level. This key accepts array of object and each object contains <strong>name</strong> and <strong>link</strong> keys.
+                                                <strong>subMenu</strong> - This is an optional key and mentioning this
+                                                key will tell library to create sub menu
+                                                level. This key accepts array of object and each object contains
+                                                <strong>name</strong> and <strong>link</strong> keys.
                                             </li>
                                         </ul>
                                     </td>
@@ -250,39 +258,47 @@
                     <p class="lead mt-3">Keyboard interaction for Top level menu</p>
                     <ul>
                         <li>
-                            <strong>TAB/ SHIFT + TAB</strong> - TAB- Select the next focusable element. SHIFT + TAB- select previous focusable element.
+                            <strong>TAB/ SHIFT + TAB</strong> - TAB- Select the next focusable element. SHIFT + TAB-
+                            select previous focusable element.
                         </li>
                         <li>
-                            <strong>RIGHT/ LEFT</strong> - RIGHT - Select next menu item . LEFT - Select previous menu item
+                            <strong>RIGHT/ LEFT</strong> - RIGHT - Select next menu item . LEFT - Select previous menu
+                            item
                             and DOWN key decrease slider value.
                         </li>
                         <li>
-                            <strong>ENTER/ SPACE/ DOWN</strong> - Open the submenu level if exist and focus on first item.
+                            <strong>ENTER/ SPACE/ DOWN</strong> - Open the submenu level if exist and focus on first
+                            item.
                         </li>
                         <li>
                             <strong>UP</strong> - Open the submenu level if exist and focus on the last item.
                         </li>
                         <li>
-                            <strong>ESC</strong> - Set focus to Brand logo and release the focus trap which get created during RIGHT/ LEFT navigation occurs.
+                            <strong>ESC</strong> - Set focus to Brand logo and release the focus trap which get created
+                            during RIGHT/ LEFT navigation occurs.
                         </li>
                     </ul>
                     <p class="lead mt-3">Keyboard interaction for Sub level menu</p>
                     <ul>
                         <li>
-                            <strong>TAB/ SHIFT + TAB</strong> - Close the submenu. 
-                            TAB- Select the next focusable item from Top menu. 
+                            <strong>TAB/ SHIFT + TAB</strong> - Close the submenu.
+                            TAB- Select the next focusable item from Top menu.
                             SHIFT + TAB- select previous focusable item from Top menu.
                         </li>
                         <li>
-                            <strong>RIGHT/ LEFT</strong> - Close the submenu. 
-                            RIGHT - Select next item from Top menu and if next Top Menu contains submenu then submenu get extended and first item receive focus.
-                            LEFT - Select previous item from Top menu and if previous Top Menu contains submenu then submenu get extended and first item receive focus.
+                            <strong>RIGHT/ LEFT</strong> - Close the submenu.
+                            RIGHT - Select next item from Top menu and if next Top Menu contains submenu then submenu
+                            get extended and first item receive focus.
+                            LEFT - Select previous item from Top menu and if previous Top Menu contains submenu then
+                            submenu get extended and first item receive focus.
                         </li>
                         <li>
-                            <strong>ENTER/ SPACE/ DOWN</strong> - Open the submenu level if exist and focus on first item.
+                            <strong>ENTER/ SPACE/ DOWN</strong> - Open the submenu level if exist and focus on first
+                            item.
                         </li>
                         <li>
-                            <strong>UP/ DOWN</strong> - DOWN - Move focus to next sub menu item. UP - Move focus to previous sub menu item.
+                            <strong>UP/ DOWN</strong> - DOWN - Move focus to next sub menu item. UP - Move focus to
+                            previous sub menu item.
                         </li>
                         <li>
                             <strong>ESC</strong> - Close sub menu and select the current Top menu item.
@@ -295,7 +311,7 @@
 
         <button type="button" class="btn btn-default scroll-top" aria-label="Go to Top" id="scroll_top"
             onclick="topFunction()">
-            <span class="" aria-hidden="true">Top</span>
+            <i class="fa fa-chevron-up" aria-hidden="true"></i>
         </button>
 
         <footer>
@@ -389,8 +405,7 @@
                 {
                     name: 'Item 5',
                     link: '#'
-                },
-
+                }
             ]
         };
 

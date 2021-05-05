@@ -46,7 +46,7 @@ const config = {
 					loader: 'babel-loader',
 					options: {
 						presets: ['@babel/preset-env'],
-						plugins: ['@babel/plugin-transform-runtime']
+						plugins: ['@babel/plugin-transform-runtime', '@babel/plugin-syntax-dynamic-import']
 					}
 				}
 			}
@@ -79,6 +79,6 @@ const config = {
 		]
 	},
 	mode: "production",
-	devtool: false //"eval-source-map"
+	devtool: false//"eval-source-map"
 };
 module.exports = config;

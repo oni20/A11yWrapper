@@ -1,12 +1,20 @@
+html {
+    scroll-behavior: smooth;
+}
+
+pre {
+    background-color: #eee !important;
+    border-left: 6px solid #23b694;
+}
+
 code {
+    background-color: #eee !important;
     border-radius: 4px !important;
     font-weight: normal;
-    background-color: #f8f9fa !important;
     color: #000000 !important;
     display: block;
     overflow-x: auto;
     padding: 1.5rem;
-    border: 1px solid #dddddd;
 }
 .scroll-top {
     display: none;
@@ -16,15 +24,16 @@ code {
     z-index: 99;
     border: none;
     outline: none;
-    color: #292b2c;
+    color: white;
     cursor: pointer;
     padding: 15px;
-    border-radius: 10px;
+    border-radius: 50%;
     font-size: 18px;
-
+    background-color: #0d9374;
+    box-shadow: 0px 2px 7px 0px black;
     &:hover {
-        background-color: #555; /* Add a dark-grey background on hover */
-        color: #fff;
+        background-color: white; /* Add a dark-grey background on hover */
+        color: #0d9374;
     }
 }
 
@@ -40,10 +49,16 @@ code {
     font-weight: normal;
 }
 
-.custom-blockquote{
+.custom-blockquote {
     border-left: 6px solid #288f5f;
     padding-left: 20px;
     font-size: 17px;
     font-weight: 500;
     line-height: 1.1;
+}
+
+.thead-inverse {
+    th {
+        background-color: #0d9374;
+    }
 }
