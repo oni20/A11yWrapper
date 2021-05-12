@@ -13,7 +13,7 @@ $blue: #6d62f9;
     .brand-logo {
         font-size: rem(20px);
     }
-    > ul {
+    ul {
         margin: 0;
         width: 100%;
 
@@ -63,9 +63,45 @@ $blue: #6d62f9;
                     }
                 }
             }
+
+            &.has-nestedmenu{
+                > a {
+                    &::after{
+                        display: inline-block;
+                        width: 0;
+                        height: 0;
+                        margin-left: 0.255em;
+                        content: "";
+                        border-top: 0.3em solid transparent;
+                        border-right: 0.3em solid transparent;
+                        border-bottom: 0.3em solid transparent;
+                        border-left: 0.3em solid;
+                    }
+                }
+
+                &.open {
+                    > ul {
+                        @include flexbox();
+                        top: em(-1px);
+                        left: em(160px);
+                    }
+                    > a {
+                        color: rgba(0, 0, 0, 0.9);
+                        text-decoration: underline;
+                    }
+                }
+            }
+
+
             &.open {
                 > ul {
                     @include flexbox();
+                }
+                > a {
+                    color: rgba(0, 0, 0, 0.9);
+                    text-decoration: underline;
+                    width: 10em;
+                    display: block;
                 }
             }
         }
@@ -81,8 +117,11 @@ $blue: #6d62f9;
         &:focus {
             background-color: white;
             color: rgba(0, 0, 0, 0.9);
-            border: 1px solid #036;
+            box-shadow: 0px 0px em(3px) em(1px) #036;
             text-decoration: underline;
+        }
+        &:focus {
+
         }
     }
     .current {
@@ -140,9 +179,9 @@ $blue: #6d62f9;
         display: block;
         position: relative;
         padding: em(20px);
-        height: em(70px);
+        max-height: em(73px);
         overflow: hidden;
-        transition: height 0.35s ease;
+        transition: max-height 0.35s ease;
 
         > ul {
             padding-left: 0px;
