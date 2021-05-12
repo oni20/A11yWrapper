@@ -146,6 +146,11 @@
                                                 key will tell library to create sub menu
                                                 level. This key accepts array of object and each object contains
                                                 <strong>name</strong> and <strong>link</strong> keys.
+                                                <p>
+                                                    <strong>
+                                                        Please note, you can create as much nested menus as you want. Just add subMenu object inside each menu item to created nested menus
+                                                    </strong>
+                                                </p>
                                             </li>
                                         </ul>
                                     </td>
@@ -267,6 +272,10 @@
                             and DOWN key decrease slider value.
                         </li>
                         <li>
+                            <strong>HOME/ END</strong> - Pressing HOME takes to first menu item and END takes to last
+                            menu item
+                        </li>
+                        <li>
                             <strong>ENTER/ SPACE/ DOWN</strong> - Open the submenu level if exist and focus on first
                             item.
                         </li>
@@ -299,6 +308,10 @@
                         <li>
                             <strong>UP/ DOWN</strong> - DOWN - Move focus to next sub menu item. UP - Move focus to
                             previous sub menu item.
+                        </li>
+                        <li>
+                            <strong>HOME/ END</strong> - Pressing HOME takes to first sub menu item and END takes to
+                            last sub menu item
                         </li>
                         <li>
                             <strong>ESC</strong> - Close sub menu and select the current Top menu item.
@@ -384,7 +397,27 @@
                         },
                         {
                             name: 'Sub item 3_2',
-                            link: '#'
+                            link: '#',
+                            subMenu: [
+                                {
+                                    name: 'Sub item 3_1_1',
+                                    link: '#'
+                                },
+                                {
+                                    name: 'Sub item 3_1_2',
+                                    link: '#',
+                                    subMenu: [
+                                        {
+                                            name: 'Sub item 3_1_2_1',
+                                            link: '#'
+                                        },
+                                        {
+                                            name: 'Sub item 3_1_2_2',
+                                            link: '#'
+                                        }
+                                    ]
+                                }
+                            ]
                         }
                     ]
                 },
@@ -452,16 +485,6 @@
                 {
                     name: 'Item 3',
                     link: '#',
-                    subMenu: [
-                        {
-                            name: 'Sub Item 3_1',
-                            link: '#'
-                        },
-                        {
-                            name: 'Sub Item 3_2',
-                            link: '#'
-                        }
-                    ]
                 }
             ]
         };

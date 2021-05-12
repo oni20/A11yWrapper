@@ -1,7 +1,15 @@
 {
-    "name": "scss-css-compile",
+    "name": "a11y-wrapper",
     "version": "1.1.0",
-    "private": true,
+    "description": "An accessible components library made in pure javascript.",
+    "main": "dist/js/A11yWrapper.min.js",
+    "author": "Md Asif Ahmed Oni",
+    "homepage": "https://github.com/oni20/A11yWrapper",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/oni20/A11yWrapper.git"
+    },
+    "license": "MIT",
     "devDependencies": {
         "@babel/core": "^7.13.16",
         "@babel/plugin-syntax-dynamic-import": "^7.8.3",
@@ -22,13 +30,12 @@
         "webpack-cli": "^3.3.4"
     },
     "scripts": {
+        "test": "echo \"No test specified\"",
         "prod": "webpack --mode production",
         "dev": "webpack --mode development",
         "watch": "webpack --watch"
     },
     "dependencies": {
-        "axios": "^0.21.1",
-        "jquery": "^3.4.1",
-        "parsleyjs": "^2.9.1"
+        "axios": "^0.21.1"
     }
 }
