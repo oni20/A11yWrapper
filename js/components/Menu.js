@@ -22,6 +22,8 @@ function A11yMenu(navContainer, options) {
   });
   this.menuItemLinks = null;
   this.subMenuItemLinks = null;
+  this.menuBarItemFirstCharacters = [];
+  this.subMenuItemFirstCharacters = [];
 
   // Apply settings from Configuration object
   this.menuID = options.id || 'menu_1';
@@ -55,7 +57,7 @@ A11yMenu.prototype.createSubMenu = function (subMenuArr, parentIndex) {
     if (item.subMenu) {
       nestedSubMenu = context.createSubMenu(item.subMenu, index);
     }
-
+  
     let listItemClass = nestedSubMenu !== "" ? 'class="has-nestedmenu"' : '',
       ariaAttrib = nestedSubMenu !== "" ? 'aria-expanded="false" aria-haspopup="true"' : '';
 
@@ -82,6 +84,9 @@ A11yMenu.prototype.createMenu = function () {
       subMenu = context.createSubMenu(menu.subMenu, idx);
     }
 
+    // Generate menu bar item first Character array
+    context.menuBarItemFirstCharacters.push(menu.name.substring(0, 1));
+
     buildMenu += subMenu === ''
       ? `<li><a role="menuitem" href="${menu.link}" data-menuindex=${idx}>${menu.name}</a></li>`
       : `<li class="has-submenu">
@@ -93,7 +98,7 @@ A11yMenu.prototype.createMenu = function () {
   buildMenu += '</ul>';
 
   let template =
-    `<nav role="presentation" aria-label="Main Navigation" class="fly-out-menu">
+    `<nav role="presentation" aria-label="${context.mainMenuLabelSRText}" class="fly-out-menu">
         ${brandLogo}
         ${buildMenu}        
         <button class="toggle-button" type="button" aria-controls="menu_${context.menuID}" aria-expanded="false"
@@ -105,7 +110,7 @@ A11yMenu.prototype.createMenu = function () {
       </nav>`
 
   context.navContainer.innerHTML = template;
-  context.menuItemLinks = document.querySelectorAll(`#menu_${context.menuID} >li>a`);
+  context.menuItemLinks = Array.from(document.querySelectorAll(`#menu_${context.menuID} >li>a`));
   context.subMenuItemLinks = document.querySelectorAll(`#menu_${context.menuID} >li li>a`);
 }
 
@@ -122,6 +127,7 @@ A11yMenu.prototype.init = function () {
   context.mobileToggleNavBtn = context.menuBox.parentElement.querySelector('button.toggle-button');
 };
 
+// Jump to Main menu item
 A11yMenu.prototype.gotoIndex = function (idx) {
   let context = this;
 
@@ -133,6 +139,7 @@ A11yMenu.prototype.gotoIndex = function (idx) {
   context.menuItemLinks[idx].focus();
 };
 
+// Jump to sub menu item
 A11yMenu.prototype.gotoSubIndex = function (menu, idx) {
   if (idx == menu.length) {
     idx = 0;
@@ -142,6 +149,7 @@ A11yMenu.prototype.gotoSubIndex = function (menu, idx) {
   menu[idx].focus();
 };
 
+// Hide sub menu
 A11yMenu.prototype.hideSubMenu = function (element) {
   let context = this;
 
@@ -151,17 +159,66 @@ A11yMenu.prototype.hideSubMenu = function (element) {
   }
 };
 
+// Check if pressed character is printable
 A11yMenu.prototype.isPrintableCharacter = function (str) {
   return str.length === 1 && str.match(/\S/);
 };
 
+// Get first character matched index
+A11yMenu.prototype.getIndexFirstChars = function (startIndex, char, firstCharacterArr) {
+  for (let i = startIndex; i < firstCharacterArr.length; i++) {
+    if (char.toUpperCase() === firstCharacterArr[i].toUpperCase()) {
+      return i;
+    }
+  }
+  return -1;
+};
+
+// Set focus to menu item based on character typed
+A11yMenu.prototype.setFocusByFirstCharacter = function (elem, char, menuList, isMainMenu) {
+  let context = this, start, index,
+    firstCharacterArr = isMainMenu ? context.menuBarItemFirstCharacters : context.subMenuItemFirstCharacters;
+
+  start = menuList.indexOf(elem) + 1;
+  
+  if (start === menuList.length) {
+    start = 0;
+  }
+
+  index = context.getIndexFirstChars(start, char, firstCharacterArr);
+
+  // If match not found then check from the beginning
+  if (index === -1) {
+    index = context.getIndexFirstChars(0, char, firstCharacterArr);
+  }
+
+  // If match found then jump to the menu item
+  if (index > -1) {
+    if (isMainMenu) {
+      context.gotoIndex(index);
+    } else {
+      context.gotoSubIndex(menuList, index)
+    }
+  }
+};
+
+// Handle menu item click event
 A11yMenu.prototype.handleClickEvent = function (isMainMenu, elem, className, event) {
   let context = this,
     subMenuLinks = elem.nextElementSibling ? elem.nextElementSibling.querySelectorAll('a') : null,
-    openedMenuList = elem.closest('nav').querySelectorAll('.open');
+    openedMenuList = elem.closest('ul').querySelectorAll('.open');
+    //elem.closest('nav').querySelectorAll('.open');
 
   // Close all the menus at first except the current one
-  if (isMainMenu && openedMenuList) {
+  /* if (isMainMenu && openedMenuList) {
+    for (let i = 0; i < openedMenuList.length; i++) {
+      if (elem.parentNode !== openedMenuList[i]) {
+        openedMenuList[i].classList.remove('open');
+      }
+    }
+  } */
+
+  if (openedMenuList) {
     for (let i = 0; i < openedMenuList.length; i++) {
       if (elem.parentNode !== openedMenuList[i]) {
         openedMenuList[i].classList.remove('open');
@@ -181,6 +238,7 @@ A11yMenu.prototype.handleClickEvent = function (isMainMenu, elem, className, eve
   }
 };
 
+// List of all event handlers
 A11yMenu.prototype.eventHandlers = function () {
   let context = this;
 
@@ -199,6 +257,7 @@ A11yMenu.prototype.eventHandlers = function () {
     }
   });
 
+  // Main menu item event handle
   Array.prototype.forEach.call(context.menuItemLinks, function (menuLink, i) {
     // Main menu link click event
     menuLink.addEventListener("click", function (event) {
@@ -261,8 +320,7 @@ A11yMenu.prototype.eventHandlers = function () {
 
         default:
           if (context.isPrintableCharacter(event.key)) {
-            this.menu.setFocusByFirstCharacter(this, event.key);
-            flag = true;
+            context.setFocusByFirstCharacter(this, event.key, context.menuItemLinks, true);
           }
           break;
       }
@@ -273,6 +331,7 @@ A11yMenu.prototype.eventHandlers = function () {
     });
   });
 
+  // Sub menu item event handle
   Array.prototype.forEach.call(context.subMenuItemLinks, function (subMenuLink, i) {
 
     subMenuLink.addEventListener("click", function (event) {
@@ -283,9 +342,14 @@ A11yMenu.prototype.eventHandlers = function () {
     // Sub menu link keypress event
     subMenuLink.addEventListener("keydown", function (event) {
       let prevdef = true, siblings = [];
+      
+      // Empty the list first before pusing new siblings first character
+      context.subMenuItemFirstCharacters = [];
 
       for (let i = 0; i < this.closest('ul').children.length; i++) {
-        siblings.push(this.closest('ul').children[i].children[0]);
+        let subMenuAnchor = this.closest('ul').children[i].children[0];
+        siblings.push(subMenuAnchor);
+        context.subMenuItemFirstCharacters.push(subMenuAnchor.text.substring(0, 1));
       }
 
       switch (event.keyCode) {
@@ -322,6 +386,10 @@ A11yMenu.prototype.eventHandlers = function () {
             let parentMenuAnchor = this.closest('li.has-submenu').querySelector('a'),
               prevMenuIndex = parseInt(parentMenuAnchor.dataset.menuindex) - 1;
 
+            // Move to item if no menu found at the left  
+            if (prevMenuIndex < 0) {
+              prevMenuIndex = context.menuItemLinks.length - 1;
+            }
             context.gotoIndex(prevMenuIndex);
             context.hideSubMenu(parentMenuAnchor);
             context.menuItemLinks[prevMenuIndex].click();
@@ -377,7 +445,12 @@ A11yMenu.prototype.eventHandlers = function () {
           parentAnchor.click();
           parentAnchor.focus();
           prevdef = true;
+          break;
 
+        default:
+          if (context.isPrintableCharacter(event.key)) {
+            context.setFocusByFirstCharacter(this, event.key, siblings, false);
+          }
           break;
       }
 
