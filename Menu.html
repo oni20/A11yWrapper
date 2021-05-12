@@ -59,9 +59,7 @@
 
             <div class="col-sm-12 col-md-9">
                 <h2>Demo</h2>
-
                 <div id='menu_container' class="boy"></div>
-
                 <div id="init" class="mt-5">
                     <h2>Initial setup</h2>
                     <p>
@@ -70,12 +68,9 @@
                         Call the menu component from Wrapper library
                     </p>
                 </div>
-
-                <pre>
+    <pre>
     <code>
-    <span>
         &lt;div id='menu_container'&gt;&lt;/div&gt;
-    </span>
     </code>
     </pre>
                 <div id="configuration">
@@ -148,7 +143,9 @@
                                                 <strong>name</strong> and <strong>link</strong> keys.
                                                 <p>
                                                     <strong>
-                                                        Please note, you can create as much nested menus as you want. Just add subMenu object inside each menu item to created nested menus
+                                                        Please note, you can create as much nested menus as you want.
+                                                        Just add subMenu object inside each menu item to created nested
+                                                        menus
                                                     </strong>
                                                 </p>
                                             </li>
@@ -164,7 +161,7 @@
     <span>
     var menuOption = {
         id: 'menu_1',
-        mainMenuLabelSRText: '',
+        mainMenuLabelSRText: 'Menu demo',
         brandLogo: {
             link: '#',
             content: 'Navbar'
@@ -272,10 +269,6 @@
                             and DOWN key decrease slider value.
                         </li>
                         <li>
-                            <strong>HOME/ END</strong> - Pressing HOME takes to first menu item and END takes to last
-                            menu item
-                        </li>
-                        <li>
                             <strong>ENTER/ SPACE/ DOWN</strong> - Open the submenu level if exist and focus on first
                             item.
                         </li>
@@ -283,8 +276,23 @@
                             <strong>UP</strong> - Open the submenu level if exist and focus on the last item.
                         </li>
                         <li>
+                            <strong>HOME/ END</strong> - Pressing HOME takes to first menu item and END takes to last
+                            menu item
+                        </li>
+                        <li>
                             <strong>ESC</strong> - Set focus to Brand logo and release the focus trap which get created
                             during RIGHT/ LEFT navigation occurs.
+                        </li>
+                        <li>
+                            <strong>CHARACTER</strong>
+                            <ul>
+                                <li>
+                                    Moves focus to next item in the menubar having a name that starts with the typed character.
+                                </li>
+                                <li>
+                                    If none of the items have a name starting with the typed character, focus does not move.
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                     <p class="lead mt-3">Keyboard interaction for Sub level menu</p>
@@ -315,6 +323,17 @@
                         </li>
                         <li>
                             <strong>ESC</strong> - Close sub menu and select the current Top menu item.
+                        </li>
+                        <li>
+                            <strong>CHARACTER</strong>
+                            <ul>
+                                <li>
+                                    Moves focus to next item in the menubar having a name that starts with the typed character.
+                                </li>
+                                <li>
+                                    If none of the items have a name starting with the typed character, focus does not move.
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 </div>
@@ -373,15 +392,61 @@
     <script type="text/javascript">
         var menuOption1 = {
             id: 'menu_1',
-            mainMenuLabelSRText: '',
+            mainMenuLabelSRText: 'Navigation menu demo',
             brandLogo: {
                 link: '#',
                 content: 'Navbar'
             },
             menuList: [
                 {
-                    name: 'Item 1',
-                    link: '#'
+                    name: 'About',
+                    link: '#',
+                    subMenu: [
+                        {
+                            name: 'Overview',
+                            link: '#'
+                        },
+                        {
+                            name: 'Administration',
+                            link: '#'
+                        },
+                        {
+                            name: 'Facts',
+                            link: '#',
+                            subMenu: [
+                                {
+                                    name: 'History',
+                                    link: '#'
+                                },
+                                {
+                                    name: 'Current statistics',
+                                    link: '#'
+                                },
+                                {
+                                    name: 'Awards',
+                                    link: '#'
+                                }
+                            ]
+                        },
+                        {
+                            name: 'Campus tour',
+                            link: '#',
+                            subMenu: [
+                                {
+                                    name: 'For prospective students',
+                                    link: '#'
+                                },
+                                {
+                                    name: 'For Alumni',
+                                    link: '#'
+                                },
+                                {
+                                    name: 'For visitors',
+                                    link: '#'
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     name: 'Item 2',
