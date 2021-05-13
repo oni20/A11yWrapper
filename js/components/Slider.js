@@ -29,6 +29,12 @@ function A11ySlider(container, options) {
   this.valueMin = options ? options.min || 0 : 0;
   this.valueMax = options ? options.max || 100 : 100;
   this.valueNow = options ? options.now || 0 : 0;
+  this.css = {
+    thumbColor: options?.css?.thumbColor ?? '#0fa683',
+    fillColor: options?.css?.fillColor ?? '#5abfa8',
+    borderColor: options?.css?.borderColor ?? '#d7d0d0',
+    backgroundColor: options?.css?.backgroundColor ?? '#f3f0f0'
+  },
   this.stepper = options ? options.stepper > 0 ? options.stepper : 10 : 10;
   this.label = options ? options.label || 'Slider' : 'Slider';
   this.output = options ? options.output || '' : '';
@@ -49,8 +55,9 @@ A11ySlider.prototype.createSliderControl = function () {
     template =
       `<div class="aria-widget-slider">
         <div id="labelID_${context.rollNo}" class="label">${context.label}</div>
-        <div class="rail">
+        <div class="rail" style="border-color:${context.css.borderColor}">
           <div id="slider_thumb_${context.rollNo}"
+              style="background-color:${context.css.thumbColor}"
               role="slider" 
               tabindex="0" 
               class="thumb" 
@@ -135,6 +142,10 @@ A11ySlider.prototype.moveSliderTo = function (value) {
   if (context.valueDomNode) {
     context.valueDomNode.innerHTML = context.valueNow.toString();
   }
+
+  let railFillPercent = (context.valueNow*100)/context.valueMax;
+
+  context.railDomNode.style.background = `linear-gradient(to right, ${context.css.fillColor} 0%, ${context.css.fillColor} ${railFillPercent}%, ${context.css.backgroundColor} ${railFillPercent}%, ${context.css.backgroundColor} 100%)`;
 
   // Return Callback function
   context.onSliderChange(context.valueNow)

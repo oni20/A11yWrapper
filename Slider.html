@@ -83,31 +83,7 @@
                         <strong>$(document).ready(...)</strong> or <strong>Window.onload</strong> or 
                         <strong>Window.eventListener('load', ...)</strong>. Then slider will
                         load with default settings.
-                        <strong>
-                            Check out how to add <a href="#multiple">multiple</a> sliders on the page
-                        </strong>
                     </p>
-
-    <pre>
-    <code>
-    <span>
-        // JavaScript Users - Class name for Multiple slider 
-        window.addEventListener('load', function () {
-            window.A11yWrapper('.slider-class').slider();
-        });
-
-        // JavaScript Users - ID name for one single slider 
-        window.addEventListener('load', function () {
-            window.A11yWrapper('#sliderID').slider();
-        });
-
-        //jQuery Users
-        $( document ).ready(function() {
-            window.A11yWrapper('#sliderID').slider();
-        });
-    </span>
-    </code>
-    </pre>
                 </div>
 
                 <div id="configuration">
@@ -178,6 +154,27 @@
                                         after movement.
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td>css</td>
+                                    <td>Object</td>
+                                    <td>It's an optional key and holds color settings for Slider. Any valid color code format is supported.
+                                        All the keys inside the object are optional too.
+                                        <ul>
+                                            <li>
+                                                <strong>thumbColor</strong> - Set color to circular thumb. Default is #0fa683
+                                            </li>
+                                            <li>
+                                                <strong>borderColor</strong> - Set border color outer to slider rail. Default is #d7d0d0
+                                            </li>
+                                            <li>
+                                                <strong>fillColor</strong> - Set filled color in slider rail to visually show how much it moved to right. Default is #5abfa8
+                                            </li>
+                                            <li>
+                                                <strong>backgroundColor</strong> - Set background color to rail. It visually shows empty rail and how much left to be filled. Default is #f3f0f0
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>                    
@@ -190,6 +187,12 @@
         max: 255,
         now: 50,
         stepper: 10,
+        css:{
+            thumbColor: '#6e6d6d',
+            borderColor: '#d7d0d0',
+            fillColor: '#a4a1a1',
+            backgroundColor: '#f3f0f0'
+        },
         label: 'Demo slider',
         output: '#sliderVal',
         onSliderChange: function (data) {
@@ -336,7 +339,7 @@
             id:'slider_1',
             min: 0,
             max: 255,
-            now: 50,
+            now: 50,            
             stepper: 0,
             label: 'Slider label',
             output: '#sliderVal',
@@ -350,6 +353,12 @@
             min: 0,
             max: 100,
             now: 10,
+            css:{
+                thumbColor: '#6e6d6d',
+                borderColor: '#d7d0d0',
+                fillColor: '#a4a1a1',
+                backgroundColor: '#f3f0f0'
+            },
             label: 'Multi Slider 1',
             output: '#sliderValMulti1',
             onSliderChange: function (data) {
@@ -361,6 +370,7 @@
                 min: 0,
                 max: 255,
                 now: 50,
+                color: '#0fa683',
                 label: 'Multi Slider 2',
                 output: '#sliderValMulti2',
                 onSliderChange: function (data) {
