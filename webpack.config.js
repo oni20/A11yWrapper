@@ -79,6 +79,6 @@ const config = {
 		]
 	},
 	mode: "production",
-	devtool: false//"eval-source-map"
+	devtool: "eval-source-map"
 };
 module.exports = config;
