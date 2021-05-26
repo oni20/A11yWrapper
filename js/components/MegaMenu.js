@@ -9,6 +9,12 @@ function A11yMegaMenu(element, options) {
   this.megaMenuContainer = element;
   this.settings = options;
   this.menuList = options.menuList;
+  this.content = options.content || {
+    mainMenuLabelSRText: 'Mega menu demo',
+    mobileMenuBtnText: 'Open Mobile menu',
+    mobileBackBtnText: 'Back',
+    mobileHomeBtnText: 'Home'
+  };
   this.keys = {
     ESC: 27,
     TAB: 9,
@@ -88,7 +94,7 @@ A11yMegaMenu.prototype.createMultiLevel = function (subMenu) {
 
   subMultiMenuTemplate += `
     <li class="mobile-menu-back-item">
-      <a href="javascript:void(0);" class="menu-link mobile-menu-back-link">Back</a>
+      <a href="javascript:void(0);" class="menu-link mobile-menu-back-link">${context.content.mobileBackBtnText}</a>
     </li>
   </ul>`;
 
@@ -144,9 +150,9 @@ A11yMegaMenu.prototype.createMegaMenu = function () {
   let context = this,
     template = `
   <div class="nav">
-    <nav id="${context.settings.id}" role="presentation" aria-label="Mega menu">
-      <a href="javascript:void(0);" class="mobile-menu-trigger">Open mobile menu</a>
-      <ul class="menu menu-bar">`;
+    <nav id="${context.settings.id}" role="presentation" aria-label="${context.content.mainMenuLabelSRText}">
+      <a href="javascript:void(0);" class="mobile-menu-trigger">${context.content.mobileMenuBtnText}</a>
+      <ul class="menu menu-bar" role="menubar">`;
 
   context.menuList.forEach((item, idx) => {
     if (item.type) {
@@ -166,7 +172,7 @@ A11yMegaMenu.prototype.createMegaMenu = function () {
 
   template += `
             <li class="mobile-menu-header">
-						  <a href="/home" class=""><span>Home</span></a>
+						  <a href="/home" class=""><span>${context.content.mobileHomeBtnText}</span></a>
 						</li>
           </ul>
         </nav>
@@ -219,7 +225,7 @@ A11yMegaMenu.prototype.eventHandlers = function () {
     // Click event - Block default behavior if link has sub menu
     parentMenuItem.addEventListener("click", function (event) {
       if(this.hasAttribute('aria-haspopup')){
-        //event.preventDefault();
+        event.preventDefault();
       }
     });
 

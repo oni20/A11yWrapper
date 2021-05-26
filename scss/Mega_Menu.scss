@@ -116,7 +116,8 @@ nav {
         background: #ffffff;
         > nav {
             max-width: em(900px);
-            margin: 0 auto;
+            width: 100%;
+            @include justify-content(space-evenly);
         }
     }
     .menu {
@@ -167,6 +168,7 @@ nav {
                     ~ {
                         ul {
                             @include flexbox();
+                            border: em(1px) solid #ccc;
                         }
                     }
                     background: #0d9374;
@@ -326,8 +328,8 @@ nav {
         a {
             background: #d9d9d9;
             color: #2a2a2a;
-            max-height: calc(1.4em + em(40px));
-            margin-top: calc(0px - (1.4em + em(40px)));
+            max-height: calc(1.4em + 40px);
+            margin-top: calc(0px - (1.4em + 40px));
             pointer-events: none;
             &:before {
                 content: "";
@@ -365,7 +367,7 @@ nav {
                         max-height: 100vh;
                         width: 100%;
                         transition: left 0.3s;
-                        margin-top: calc(1.4em + em(40px));
+                        margin-top: calc(1.4em + 40px);
                         > li {
                             > [aria-haspopup="true"] {
                                 font-size: 1.2em;

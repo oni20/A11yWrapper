@@ -22,8 +22,8 @@
         <div class="container">
             <h1 class="display-3">Mega Menu</h1>
             <p>
-                This menu is purely built on JavaScript and fully customizable. Developer needs to
-                call the wrapper class and show container where menu will be created on the fly. This menu can have
+                This mega menu is purely built on JavaScript and fully customizable. Developer needs to
+                call the wrapper class and show container where menu will be created on the fly. Mega menu can have
                 submenus displayed as dropdown.
             </p>
         </div>
@@ -59,29 +59,24 @@
 
             <div class="col-sm-12 col-md-9">
                 <h2>Demo</h2>
-
                 <div id="mega_menu_container"></div>
-
                 <div id="init" class="mt-5">
                     <h2>Initial setup</h2>
                     <p>
-                        Paste below HTML structure at your code where you want menu to appear. Any ID or classname is
+                        Paste below HTML structure at your code where you want mega menu to appear. Any ID or classname is
                         fine. Call the menu component from Wrapper library
                     </p>
                 </div>
-
-                <pre>
+    <pre>
     <code>
-    <span>
-        &lt;div id='mega_menu_container'&gt;&lt;/div&gt;
-    </span>
+    &lt;div id='mega_menu_container'&gt;&lt;/div&gt;
     </code>
     </pre>
 
                 <div id="configuration">
                     <h2>Configuration</h2>
                     <p>
-                        All sort of customization need to be passed as an Object. Menu settings can be customized by altering few attributes like
+                        All sort of customization need to be passed as an Object. Mega menu settings can be customized by altering few attributes like
                     </p>
 
                     <div class="table-responsive">
@@ -95,22 +90,229 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>N/A</td>
-                                    <td>N/A</td>
-                                    <td>N/A</td>
+                                    <td>id</td>
+                                    <td>String</td>
+                                    <td>It's a required attribute and necessary to follow accessibility
+                                        guideline. This should be unique</td>
                                 </tr>
                                 <tr>
-                                    <td>N/A</td>
-                                    <td>N/A</td>
-                                    <td>N/A</td>
+                                    <td>content</td>
+                                    <td>Object</td>
+                                    <td>It's a required contentful key and contains following keys
+                                        <ul>
+                                            <li><strong>mainMenuLabelSRText</strong> - Screen reader content for navigation bar. Default is "Mega menu demo"</li>
+                                            <li><strong>mobileMenuBtnText</strong> - Menu button text in mobile view. Valid HTML tags can be parsed too. Default is "Open mobile menu"</li>
+                                            <li><strong>mobileBackBtnText</strong> - Back button label for Mobile view. Default is "Back"</li>
+                                            <li><strong>mobileHomeBtnText</strong> - Home button label for Mobile view. Default is "Home"</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>menuList</td>
+                                    <td>Array of Objects</td>
+                                    <td>It's a required key and holds menu list information. This key has following inner keys
+                                        <ul>
+                                            <li><strong>name</strong> - Menu item text</li>
+                                            <li><strong>link</strong> - URL of menu item. Setting link value to 'no-link' will show the item as paragraph</li>
+                                            <li><strong>type</strong> - Define sub menu type. Available values are 'multi' and 'col'
+                                                <ul>
+                                                    <li><strong>multi</strong> - It means nested menu can have more than one sub level</li>
+                                                    <li><strong>col</strong> - Show sub menu items in Grid design. 3 columns or columns are supported as well</li>
+                                                </ul>
+                                            </li>
+                                            <li><strong>subMenu</strong> - Hold information of sub menu items. All the keys under menuList are supported here as well. For more information check the below structure.</li>
+                                            <li><strong>shortDesc</strong> - This is an optional key and show small text after the link defining purpose of the menu item.</li>
+                                            <li><strong>longDesc</strong> - This is an optional key and define detail description about the menu item.</li>
+                                        </ul>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
-                    </div>                    
+                    </div>
+    <pre>
+    <code>
+    var megaMenuOption = {
+        id: 'menu_1',
+        content: {
+            mainMenuLabelSRText: 'Mega menu demo',
+            mobileMenuBtnText: '<strong>Open Mobile menu</strong>',
+            mobileBackBtnText: 'Back',
+            mobileHomeBtnText: 'Home'
+        },			
+        menuList: [
+            {
+                name: 'Multilevel mega menu',
+                link: '#',
+                type: 'multi',
+                subMenu: [
+                    {
+                        name: '1.1 Flyout link',
+                        link: '#',
+                        subMenu: [
+                            {
+                                name: '1.1.1 Page link',
+                                link: '#'
+                            },
+                            {
+                                name: '1.1.2 Flyout link',
+                                link: '#',
+                                subMenu: [
+                                    {
+                                        name: '1.1.2.1 Page link',
+                                        link: '#'
+                                    },
+                                    {
+                                        name: '1.1.2.2 Page link',
+                                        link: '#'
+                                    }
+                                ]
+                            },
+                            {
+                                name: '1.1.3 Page link',
+                                link: '#'
+                            }
+                        ]
+                    },
+                    {
+                        name: '1.2 Flyout link',
+                        link: '#',
+                        subMenu: [
+                            {
+                                name: '1.2.1 Page link',
+                                link: '#'
+                            },
+                            {
+                                name: '1.2.2 Page link',
+                                link: '#'
+                            }
+                        ]
+                    },
+                    {
+                        name: '1.3 Flyout link',
+                        link: '#',
+                        subMenu: [
+                            {
+                                name: '1.3.1 Page link',
+                                link: '#'
+                            },
+                            {
+                                name: '1.3.2 Page link',
+                                link: '#'
+                            }
+                        ]
+                    },
+                    {
+                        name: '1.4 Page link',
+                        link: '#'
+                    }
+                ]
+            },
+            {
+                name: 'Flat mega menu (3 cols)',
+                link: '#',
+                type: 'cols',
+                subMenu: [
+                    {
+                        name: '2.1 Page link Header',
+                        link: '#',
+                        subMenu: [
+                            {
+                                name: '2.1.1 Page link',
+                                link: '#'
+                            },
+                            {
+                                name: '2.1.2 Page link',
+                                link: '#'
+                            },
+                            {
+                                name: '2.1.3 Page link',
+                                link: '#'
+                            }
+                        ]
+                    },
+                    {
+                        name: '2.2 Page link Header',
+                        link: '#',
+                        subMenu: [
+                            {
+                                name: '2.2.1 Page link',
+                                link: '#'
+                            },
+                            {
+                                name: '2.2.2 Page link',
+                                link: '#'
+                            },
+                            {
+                                name: '2.2.3 Page link',
+                                link: '#'
+                            }
+                        ]
+                    },
+                    {
+                        name: '2.3 Page link Header',
+                        link: '#',
+                        subMenu: [
+                            {
+                                name: '2.3.1 Page link',
+                                link: '#'
+                            },
+                            {
+                                name: '2.3.2 Page link',
+                                link: '#'
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                name: 'Flat mega menu (2 cols)',
+                link: '#',
+                type: 'cols',
+                subMenu: [
+                    {
+                        name: '3.1 Page link Header',
+                        link: '#',
+                        subMenu: [
+                            {
+                                name: '3.1.1 Page link Header',
+                                link: '#',
+                                shortDesc: 'Short description of link'
+                            },
+                            {
+                                name: '3.1.2 Page link Header',
+                                link: '#',
+                                shortDesc: 'Short description of link'
+                            },
+                            {
+                                name: '3.1.3 Page link Header',
+                                link: '#',
+                                shortDesc: 'Short description of link'
+                            }
+                        ]
+                    },
+                    {
+                        name: '3.2 Page link Header',
+                        link: 'no-link',
+                        longDesc: "This is just static content. You can add anything here. Images, text, buttons, your grandma's secrect recipe."
+                    }
+                ]
+            },
+            {
+                name: 'Static link',
+                link: '#'
+            }
+        ]
+    };
+
+    window.addEventListener('load', function () {
+        window.A11yWrapper('#mega_menu_container').megamenu(megaMenuOption);        
+    });
+    </code>
+    </pre>                    
                 </div>
 
                 <div id="multiple">
-                    <h2>How to use Menu component multiple times</h2>
+                    <h2>How to use Mega menu component multiple times</h2>
 
                     <div class='multi-mega-menu mb-4'></div>
                     <div class='multi-mega-menu mb-4'></div>
@@ -127,7 +329,6 @@
                             </p>
                             <pre>
     <code>
-    <span>
     var megaMenuOption1 = {...},
         megaMenuOption2 = {...};
 
@@ -135,7 +336,6 @@
         window.A11yWrapper('#mega_menu_container1').megamenu(megaMenuOption1);
         window.A11yWrapper('#mega_menu_container2').megamenu(megaMenuOption2);
     });
-    </span>
     </code>
     </pre>
                         </li>
@@ -148,16 +348,14 @@
                                 If only one configuration object is passed then both Mega Menus will be built upon that
                                 single configuration object.
                             </p>
-                            <pre>
+    <pre>
     <code>
-    <span>
     var megaMenuOption1 = {...},
         megaMenuOption2 = {...};
 
     window.addEventListener('load', function () {
         window.A11yWrapper('.mega-menu-container').megamenu(megaMenuOption1, megaMenuOption2);
     });
-    </span>
     </code>
     </pre>
                         </li>
@@ -172,17 +370,13 @@
                             <strong>TAB/ SHIFT + TAB</strong> - TAB- Select the next focusable element. SHIFT + TAB- select previous focusable element.
                         </li>
                         <li>
-                            <strong>RIGHT/ LEFT</strong> - RIGHT - Select next menu item . LEFT - Select previous menu item
-                            and DOWN key decrease slider value.
+                            <strong>RIGHT/ LEFT</strong> - RIGHT - Select next menu item . LEFT - Select previous menu item.
                         </li>
                         <li>
-                            <strong>ENTER/ SPACE/ DOWN</strong> - Open the submenu level if exist and focus on first item.
+                            <strong>DOWN</strong> - Open the submenu level if exist and focus on first item.
                         </li>
                         <li>
                             <strong>UP</strong> - Open the submenu level if exist and focus on the last item.
-                        </li>
-                        <li>
-                            <strong>ESC</strong> - Set focus to Brand logo and release the focus trap which get created during RIGHT/ LEFT navigation occurs.
                         </li>
                     </ul>
                     <p class="lead mt-3">Keyboard interaction for Sub level menu</p>
@@ -262,10 +456,16 @@
 
     <script type="text/javascript">
         var megaMenuOption = {
-			id: 'menu_1',			
+			id: 'menu_1',
+            content: {
+                mainMenuLabelSRText: 'Mega menu demo',
+                mobileMenuBtnText: '<strong>Open Mobile menu</strong>',
+                mobileBackBtnText: 'Back',
+                mobileHomeBtnText: 'Home'
+            },			
 			menuList: [
 				{
-					name: 'Multilevel mega menu',
+					name: 'Multi level menu',
 					link: '#',
 					type: 'multi',
 					subMenu: [
@@ -332,7 +532,7 @@
 					]
 				},
 				{
-					name: 'Flat mega menu (3 cols)',
+					name: 'Flat menu (3 cols)',
 					link: '#',
 					type: 'cols',
 					subMenu: [
@@ -373,6 +573,199 @@
 							]
 						},
 						{
+							name: '2.3 Page link Header',
+							link: '#',
+							subMenu: [
+								{
+									name: '2.3.1 Page link',
+									link: '#'
+								},
+								{
+									name: '2.3.2 Page link',
+									link: '#'
+								}
+							]
+						}
+					]
+				},
+				{
+					name: 'Flat menu (2 cols)',
+					link: '#',
+					type: 'cols',
+					subMenu: [
+						{
+							name: '3.1 Page link Header',
+							link: '#',
+							subMenu: [
+								{
+									name: '3.1.1 Page link Header',
+									link: '#',
+									shortDesc: 'Short description of link'
+								},
+								{
+									name: '3.1.2 Page link Header',
+									link: '#',
+									shortDesc: 'Short description of link'
+								},
+								{
+									name: '3.1.3 Page link Header',
+									link: '#',
+									shortDesc: 'Short description of link'
+								}
+							]
+						},
+						{
+							name: '3.2 Page link Header',
+							link: 'no-link',
+							longDesc: "This is just static content. You can add anything here. Images, text, buttons, your grandma's secrect recipe."
+						}
+					]
+				},
+				{
+					name: 'Static link 1',
+					link: '#'
+				},
+                {
+					name: 'Static link 2',
+					link: '#'
+				}
+			]
+		},
+        megaMenuOption2 = {
+			id: 'menu_2',
+            content: {
+                mainMenuLabelSRText: 'Mega menu demo',
+                mobileMenuBtnText: '<strong>Open Mobile menu</strong>',
+                mobileBackBtnText: 'Back',
+                mobileHomeBtnText: 'Home'
+            },			
+			menuList: [
+				{
+					name: 'Multilevel mega menu',
+					link: '#',
+					type: 'multi',
+					subMenu: [
+						{
+							name: '1.1 Flyout link',
+							link: '#',
+							subMenu: [
+								{
+									name: '1.1.1 Page link',
+									link: '#'
+								},
+								{
+									name: '1.1.2 Flyout link',
+									link: '#'
+								}
+							]
+						},
+						{
+							name: '1.2 Flyout link',
+							link: '#',
+							subMenu: [
+								{
+									name: '1.2.1 Page link',
+									link: '#'
+								},
+								{
+									name: '1.2.2 Page link',
+									link: '#'
+								}
+							]
+						}
+					]
+				},				
+				{
+					name: 'Flat mega menu (2 cols)',
+					link: '#',
+					type: 'cols',
+					subMenu: [
+						{
+							name: '3.1 Page link Header',
+							link: '#',
+							subMenu: [
+								{
+									name: '3.1.1 Page link Header',
+									link: '#',
+									shortDesc: 'Short description of link'
+								},
+								{
+									name: '3.1.2 Page link Header',
+									link: '#',
+									shortDesc: 'Short description of link'
+								},
+								{
+									name: '3.1.3 Page link Header',
+									link: '#',
+									shortDesc: 'Short description of link'
+								}
+							]
+						},
+						{
+							name: '3.2 Page link Header',
+							link: 'no-link',
+							longDesc: "This is just static content. You can add anything here. Images, text, buttons, your grandma's secrect recipe."
+						}
+					]
+				},
+				{
+					name: 'Static link',
+					link: '#'
+				}
+			]
+		},
+        megaMenuOption3 = {
+			id: 'menu_3',
+            content: {
+                mainMenuLabelSRText: 'Mega menu demo',
+                mobileMenuBtnText: '<strong>Open Mobile menu</strong>',
+                mobileBackBtnText: 'Back',
+                mobileHomeBtnText: 'Home'
+            },			
+			menuList: [				
+				{
+					name: 'Flat mega menu (3 cols)',
+					link: '#',
+					type: 'cols',
+					subMenu: [
+						{
+							name: '2.1 Page link Header',
+							link: '#',
+							subMenu: [
+								{
+									name: '2.1.1 Page link',
+									link: '#'
+								},
+								{
+									name: '2.1.2 Page link',
+									link: '#'
+								},
+								{
+									name: '2.1.3 Page link',
+									link: '#'
+								}
+							]
+						},
+						{
+							name: '2.2 Page link Header',
+							link: 'no-link',
+							longDesc: "This is just static content. You can add anything here. Images, text, buttons, your grandma's secrect recipe."
+						},
+						{
+							name: '2.3 Page link Header',
+							link: '#',
+							subMenu: [
+								{
+									name: '2.3.1 Page link',
+									link: '#'
+								},
+								{
+									name: '2.3.2 Page link',
+									link: '#'
+								}
+							]
+						},
+                        {
 							name: '2.3 Page link Header',
 							link: '#',
 							subMenu: [
@@ -430,7 +823,7 @@
 
         window.addEventListener('load', function () {
             window.A11yWrapper('#mega_menu_container').megamenu(megaMenuOption);
-            //window.A11yWrapper('.multi-mega-menu').megamenu(megaMenuOption2, megaMenuOption3);
+            window.A11yWrapper('.multi-mega-menu').megamenu(megaMenuOption2, megaMenuOption3);
         });
 
     </script>
