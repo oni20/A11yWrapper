@@ -1,3 +1,527 @@
 @import "helper.scss";
 @import "flexbox.scss";
 
+@include keyframes(dropdown) {
+    0% {
+        opacity: 0;
+        transform: scaleY(0);
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: scaleY(1);
+    }
+}
+
+@include keyframes(flyout) {
+    0% {
+        opacity: 0;
+        transform: scaleX(0);
+    }
+    100% {
+        opacity: 1;
+        transform: scaleX(1);
+    }
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    &:before {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+    &:after {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+}
+nav {
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    li {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    a {
+        display: block;
+        text-decoration: none;
+        &:hover {
+            text-decoration: none;
+        }
+        &:visited {
+            text-decoration: none;
+        }
+    }
+}
+.menu-bar {
+    background: #eceeef;
+    @include flexbox();
+}
+.menu-link {
+    padding: em(20px) em(15px);
+    background: transparent;
+    color: rgba(0,0,0,.9);
+    transition: background 0.2s, color 0.2s;
+    position: relative;
+    z-index: 1;
+}
+.menu-link[aria-haspopup="true"] {
+    padding-right: em(40px);
+    &:after {
+        content: "";
+        background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1397521/arrowRight.svg#accent");
+        background-size: em(14px);
+        width: em(14px);
+        height: em(14px);
+        font-size: rem(12px);
+        position: absolute;
+        right: em(10px);
+        top: 50%;
+        transform: translateY(-50%);
+    }
+}
+.mega-menu-header {
+    font-size: 1.2em;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #136a73;
+}
+.mega-menu {
+    background: #ffffff;
+    z-index: 10;
+}
+.mega-menu--multiLevel {
+    @include flex-direction(column);
+}
+.open {
+    display: flex !important;
+}
+.has-submenu {
+    .open {
+        display: block;
+    }
+}
+@media all and (min-width: 951px) {
+    .nav {
+        margin-top: em(50px);
+        background: #ffffff;
+        > nav {
+            max-width: em(900px);
+            width: 100%;
+            @include justify-content(space-evenly);
+        }
+    }
+    .menu {
+        [aria-haspopup="true"] {
+            ~ {
+                ul {
+                    display: none;
+                }
+            }
+        }
+    }
+    .menu-bar {
+        position: relative;
+        > li {
+            > [aria-haspopup="true"] {
+                &:after {
+                    background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1397521/arrowBottom.svg#accent");
+                }
+                &:hover {
+                    &:after {
+                        background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1397521/arrowBottom.svg#light");
+                    }
+                }
+                &:focus {
+                    ~ {
+                        ul {
+                            @include flexbox();
+                            transform-origin: top;
+                            animation: dropdown 0.2s ease-out;
+                        }
+                    }
+                    background: #0d9374;
+                    color: #ffffff;
+                    &:after {
+                        background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1397521/arrowTop.svg#light");
+                    }
+                }
+                ~ {
+                    ul {
+                        &:hover {
+                            @include flexbox();
+                        }
+                    }
+                }
+            }
+            &:focus-within {
+                > [aria-haspopup="true"] {
+                    ~ {
+                        ul {
+                            @include flexbox();
+                            border: em(1px) solid #ccc;
+                        }
+                    }
+                    background: #0d9374;
+                    color: #ffffff;
+                    &:after {
+                        background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1397521/arrowTop.svg#light");
+                    }
+                }
+            }
+            &:hover {
+                > a {
+                    background: #0d9374;
+                    color: #ffffff;
+                    &:after {
+                        background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1397521/arrowTop.svg#light");
+                    }
+                }
+            }
+        }
+
+        .mega-menu-content {
+            padding: em(20px) em(25px);
+        }
+    }
+    .mega-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        margin-top: em(5px);
+        &:hover {
+            @include flexbox();
+        }
+        a {
+            &:hover {
+                background: #dceced;
+                color: #136a73;
+            }
+        }
+    }
+    .mega-menu--multiLevel {
+        > li {
+            width: 33.33333333%;
+            > [aria-haspopup="true"] {
+                ~ {
+                    ul {
+                        left: 33.33333333%;
+                        width: 33.33333333%;
+                        ul {
+                            width: 100%;
+                            left: 100%;
+                        }
+                    }
+                }
+            }
+        }
+        li {
+            &:hover {
+                > [aria-haspopup="true"] {
+                    ~ {
+                        ul {
+                            display: block;
+                            transform-origin: left;
+                            animation: flyout 0.2s ease-out;
+                        }
+                    }
+                    background: #dceced;
+                    color: #136a73;
+                }
+                > a {
+                    background: #dceced;
+                    color: #136a73;
+                }
+            }
+            &:focus-within {
+                > [aria-haspopup="true"] {
+                    ~ {
+                        ul {
+                            display: block;
+                        }
+                    }
+                    background: #dceced;
+                    color: #136a73;
+                }
+                > a {
+                    background: #dceced;
+                    color: #136a73;
+                }
+            }
+        }
+        [aria-haspopup="true"] {
+            ~ {
+                ul {
+                    border-left: em(1px) solid #f0f0f0;
+                    position: absolute;
+                    top: 0;
+                    height: 100%;
+                    &:hover {
+                        display: block;
+                    }
+                }
+            }
+            border-left: em(1px) solid #f0f0f0;
+            &:hover {
+                display: block;
+            }
+        }
+    }
+    .mega-menu--flat {
+        > * {
+            @include flex(1);
+        }
+    }
+    .mobile-menu-trigger {
+        display: none;
+    }
+    .mobile-menu-header {
+        display: none;
+    }
+    .mobile-menu-back-item {
+        display: none;
+    }
+}
+@media all and (max-width: 950px) {
+    .nav {
+        padding: 20px;
+    }
+    .mobile-menu-trigger {
+        display: block;
+        background: #0d9374;
+        color: #ffffff;
+        border: 0;
+        padding: em(10px);
+        font-size: 1.2em;
+        border-radius: em(4px);
+        &:focus {
+            ~ {
+                ul {
+                    left: 0;
+                }
+            }
+        }
+    }
+    .mobile-menu-header {
+        display: block;
+        order: -1;
+        background: grey;
+        a {
+            padding: em(20px) em(25px);
+            color: #ffffff;
+            visibility: visible;
+        }
+    }
+    .mobile-menu-back-item {
+        display: block;
+        order: -1;
+        a {
+            background: #d9d9d9;
+            color: #2a2a2a;
+            max-height: calc(1.4em + 40px);
+            margin-top: calc(0px - (1.4em + 40px));
+            pointer-events: none;
+            &:before {
+                content: "";
+                width: em(14px);
+                height: em(12px);
+                background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1397521/arrowLeft.svg#default");
+                background-size: em(14px);
+                margin-right: em(10px);
+                display: inline-block;
+            }
+        }
+    }
+    .menu-bar {        
+        @include flex-direction(column);
+        position: fixed;
+        top: 0;
+        left: -100%;
+        height: 100vh;
+        width: em(350px);
+        max-width: em(350px);
+        max-width: 90%;
+        overflow-x: hidden;
+        transition: left 0.3s;
+        box-shadow: 1px 0px 2px 0px rgba(0, 0, 0, 0.25);
+        > li {
+            > [aria-haspopup="true"] {
+                ~ {
+                    ul {
+                        @include flexbox();
+                        @include flex-direction(column);
+                        background: #ffffff;
+                        position: absolute;
+                        left: 100%;
+                        top: 0;
+                        max-height: 100vh;
+                        width: 100%;
+                        transition: left 0.3s;
+                        margin-top: calc(1.4em + 40px);
+                        > li {
+                            > [aria-haspopup="true"] {
+                                font-size: 1.2em;
+                                ~ {
+                                    ul {
+                                        a {
+                                            padding-left: em(40px);
+                                        }
+                                        > li {
+                                            > [aria-haspopup="true"] {
+                                                ~ {
+                                                    ul {
+                                                        a {
+                                                            padding-left: em(80px);
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        [aria-haspopup="true"] {
+                            color: #2a2a2a;
+                            &:after {
+                                content: "+";
+                                background: none;
+                                font-size: 1em;
+                                font-weight: normal;
+                                height: em(20px);
+                                line-height: 1;
+                            }
+                            ~ {
+                                ul {
+                                    max-height: 0px;
+                                    transform-origin: top;
+                                    transform: scaleY(0);
+                                    transition: max-height 0.1s;
+                                }
+                            }
+                            &:focus {
+                                ~ {
+                                    ul {
+                                        max-height: em(500px);
+                                        animation: dropdown 0.3s forwards;
+                                    }
+                                }
+                            }
+                        }
+                        &:hover {
+                            left: 0;
+                        }
+                        &:focus-within {
+                            left: 0;
+                        }
+                        li {
+                            &:focus-within {
+                                > [aria-haspopup="true"] {
+                                    ~ {
+                                        ul {
+                                            max-height: em(500px);
+                                            transform: scaleY(1);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                &:focus {
+                    ~ {
+                        ul {
+                            left: 0;
+                        }
+                    }
+                }
+            }
+            &:focus-within {
+                ~ {
+                    .mobile-menu-header {
+                        a {
+                            visibility: hidden;
+                        }
+                    }
+                }
+            }
+        }
+        &:hover {
+            left: 0;
+        }
+        &:focus-within {
+            left: 0;
+        }
+    }
+    .mega-menu-content {
+        padding: em(20px) em(25px);
+    }
+}
+@media all and (max-width: 950px) and (hover: none) {
+    .mobile-menu-trigger {
+        &:hover {
+            ~ {
+                ul {
+                    left: 0;
+                }
+            }
+        }
+    }
+    .menu-bar {
+        > li {
+            > [aria-haspopup="true"] {
+                &:hover {
+                    ~ {
+                        ul {
+                            left: 0;
+                        }
+                    }
+                }
+                ~ {
+                    ul {
+                        &:hover {
+                            left: 0;
+                        }
+                        [aria-haspopup="true"] {
+                            &:hover {
+                                ~ {
+                                    ul {
+                                        max-height: em(500px);
+                                        animation: dropdown 0.3s forwards;
+                                    }
+                                }
+                            }
+                            ~ {
+                                ul {
+                                    &:hover {
+                                        max-height: em(500px);
+                                        transform: scaleY(1);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            &:hover {
+                ~ {
+                    .mobile-menu-header {
+                        a {
+                            visibility: hidden;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
