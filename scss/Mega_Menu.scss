@@ -63,28 +63,28 @@ nav {
     }
 }
 .menu-bar {
-    background: #ffffff;
-    display: flex;
+    background: #eceeef;
+    @include flexbox();
 }
 .menu-link {
-    padding: 20px 25px;
+    padding: em(20px) em(15px);
     background: transparent;
-    color: #177e89;
+    color: rgba(0,0,0,.9);
     transition: background 0.2s, color 0.2s;
     position: relative;
     z-index: 1;
 }
 .menu-link[aria-haspopup="true"] {
-    padding-right: 40px;
+    padding-right: em(40px);
     &:after {
         content: "";
         background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1397521/arrowRight.svg#accent");
-        background-size: 14px;
-        width: 14px;
-        height: 14px;
-        font-size: 12px;
+        background-size: em(14px);
+        width: em(14px);
+        height: em(14px);
+        font-size: rem(12px);
         position: absolute;
-        right: 10px;
+        right: em(10px);
         top: 50%;
         transform: translateY(-50%);
     }
@@ -100,7 +100,7 @@ nav {
     z-index: 10;
 }
 .mega-menu--multiLevel {
-    flex-direction: column;
+    @include flex-direction(column);
 }
 .open {
     display: flex !important;
@@ -112,10 +112,10 @@ nav {
 }
 @media all and (min-width: 951px) {
     .nav {
-        margin-top: 50px;
+        margin-top: em(50px);
         background: #ffffff;
         > nav {
-            max-width: 900px;
+            max-width: em(900px);
             margin: 0 auto;
         }
     }
@@ -143,12 +143,12 @@ nav {
                 &:focus {
                     ~ {
                         ul {
-                            display: flex;
+                            @include flexbox();
                             transform-origin: top;
                             animation: dropdown 0.2s ease-out;
                         }
                     }
-                    background: #177e89;
+                    background: #0d9374;
                     color: #ffffff;
                     &:after {
                         background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1397521/arrowTop.svg#light");
@@ -157,7 +157,7 @@ nav {
                 ~ {
                     ul {
                         &:hover {
-                            display: flex;
+                            @include flexbox();
                         }
                     }
                 }
@@ -166,10 +166,10 @@ nav {
                 > [aria-haspopup="true"] {
                     ~ {
                         ul {
-                            display: flex;
+                            @include flexbox();
                         }
                     }
-                    background: #177e89;
+                    background: #0d9374;
                     color: #ffffff;
                     &:after {
                         background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1397521/arrowTop.svg#light");
@@ -178,7 +178,7 @@ nav {
             }
             &:hover {
                 > a {
-                    background: #177e89;
+                    background: #0d9374;
                     color: #ffffff;
                     &:after {
                         background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1397521/arrowTop.svg#light");
@@ -186,15 +186,19 @@ nav {
                 }
             }
         }
+
+        .mega-menu-content {
+            padding: em(20px) em(25px);
+        }
     }
     .mega-menu {
         position: absolute;
         top: 100%;
         left: 0;
         width: 100%;
-        margin-top: 5px;
+        margin-top: em(5px);
         &:hover {
-            display: flex;
+            @include flexbox();
         }
         a {
             &:hover {
@@ -256,7 +260,7 @@ nav {
         [aria-haspopup="true"] {
             ~ {
                 ul {
-                    border-left: 1px solid #f0f0f0;
+                    border-left: em(1px) solid #f0f0f0;
                     position: absolute;
                     top: 0;
                     height: 100%;
@@ -265,7 +269,7 @@ nav {
                     }
                 }
             }
-            border-left: 1px solid #f0f0f0;
+            border-left: em(1px) solid #f0f0f0;
             &:hover {
                 display: block;
             }
@@ -273,7 +277,7 @@ nav {
     }
     .mega-menu--flat {
         > * {
-            flex: 1;
+            @include flex(1);
         }
     }
     .mobile-menu-trigger {
@@ -292,12 +296,12 @@ nav {
     }
     .mobile-menu-trigger {
         display: block;
-        background: #177e89;
+        background: #0d9374;
         color: #ffffff;
         border: 0;
-        padding: 10px;
+        padding: em(10px);
         font-size: 1.2em;
-        border-radius: 4px;
+        border-radius: em(4px);
         &:focus {
             ~ {
                 ul {
@@ -311,7 +315,7 @@ nav {
         order: -1;
         background: grey;
         a {
-            padding: 20px 25px;
+            padding: em(20px) em(25px);
             color: #ffffff;
             visibility: visible;
         }
@@ -322,28 +326,28 @@ nav {
         a {
             background: #d9d9d9;
             color: #2a2a2a;
-            max-height: calc(1.4em + 40px);
-            margin-top: calc(0px - (1.4em + 40px));
+            max-height: calc(1.4em + em(40px));
+            margin-top: calc(0px - (1.4em + em(40px)));
             pointer-events: none;
             &:before {
                 content: "";
-                width: 14px;
-                height: 12px;
+                width: em(14px);
+                height: em(12px);
                 background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1397521/arrowLeft.svg#default");
-                background-size: 14px;
-                margin-right: 10px;
+                background-size: em(14px);
+                margin-right: em(10px);
                 display: inline-block;
             }
         }
     }
-    .menu-bar {
-        flex-direction: column;
+    .menu-bar {        
+        @include flex-direction(column);
         position: fixed;
         top: 0;
         left: -100%;
         height: 100vh;
-        width: 350px;
-        max-width: 350px;
+        width: em(350px);
+        max-width: em(350px);
         max-width: 90%;
         overflow-x: hidden;
         transition: left 0.3s;
@@ -352,8 +356,8 @@ nav {
             > [aria-haspopup="true"] {
                 ~ {
                     ul {
-                        display: flex;
-                        flex-direction: column;
+                        @include flexbox();
+                        @include flex-direction(column);
                         background: #ffffff;
                         position: absolute;
                         left: 100%;
@@ -361,21 +365,21 @@ nav {
                         max-height: 100vh;
                         width: 100%;
                         transition: left 0.3s;
-                        margin-top: calc(1.4em + 40px);
+                        margin-top: calc(1.4em + em(40px));
                         > li {
                             > [aria-haspopup="true"] {
                                 font-size: 1.2em;
                                 ~ {
                                     ul {
                                         a {
-                                            padding-left: 40px;
+                                            padding-left: em(40px);
                                         }
                                         > li {
                                             > [aria-haspopup="true"] {
                                                 ~ {
                                                     ul {
                                                         a {
-                                                            padding-left: 80px;
+                                                            padding-left: em(80px);
                                                         }
                                                     }
                                                 }
@@ -392,7 +396,7 @@ nav {
                                 background: none;
                                 font-size: 1em;
                                 font-weight: normal;
-                                height: 20px;
+                                height: em(20px);
                                 line-height: 1;
                             }
                             ~ {
@@ -406,7 +410,7 @@ nav {
                             &:focus {
                                 ~ {
                                     ul {
-                                        max-height: 500px;
+                                        max-height: em(500px);
                                         animation: dropdown 0.3s forwards;
                                     }
                                 }
@@ -423,7 +427,7 @@ nav {
                                 > [aria-haspopup="true"] {
                                     ~ {
                                         ul {
-                                            max-height: 500px;
+                                            max-height: em(500px);
                                             transform: scaleY(1);
                                         }
                                     }
@@ -458,7 +462,7 @@ nav {
         }
     }
     .mega-menu-content {
-        padding: 20px 25px;
+        padding: em(20px) em(25px);
     }
 }
 @media all and (max-width: 950px) and (hover: none) {
@@ -490,7 +494,7 @@ nav {
                             &:hover {
                                 ~ {
                                     ul {
-                                        max-height: 500px;
+                                        max-height: em(500px);
                                         animation: dropdown 0.3s forwards;
                                     }
                                 }
@@ -498,7 +502,7 @@ nav {
                             ~ {
                                 ul {
                                     &:hover {
-                                        max-height: 500px;
+                                        max-height: em(500px);
                                         transform: scaleY(1);
                                     }
                                 }

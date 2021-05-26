@@ -214,7 +214,15 @@ A11yMegaMenu.prototype.eventHandlers = function () {
   let context = this;
 
   // Main menu events
-  Array.prototype.forEach.call(context.parentMenuList, (parentMenuItem, i) => {
+  Array.prototype.forEach.call(context.parentMenuList, parentMenuItem => {
+    
+    // Click event - Block default behavior if link has sub menu
+    parentMenuItem.addEventListener("click", function (event) {
+      if(this.hasAttribute('aria-haspopup')){
+        //event.preventDefault();
+      }
+    });
+
     // Focus event
     parentMenuItem.addEventListener("focus", function (event) {
       let linkElement = this;
@@ -228,7 +236,7 @@ A11yMegaMenu.prototype.eventHandlers = function () {
 
     // Key press event
     parentMenuItem.addEventListener("keydown", function (event) {
-      let subMenuLinks = [];
+      let prevdef = false, subMenuLinks = [];
 
       if (this.nextElementSibling) {
         Array.prototype.forEach.call(
@@ -246,40 +254,61 @@ A11yMegaMenu.prototype.eventHandlers = function () {
       switch (event.keyCode) {
         case context.keys.RIGHT:
           context.gotToMainMenuItem(parseInt(this.dataset.parentmenuidx) + 1);
+          prevdef = true;
           break;
 
         case context.keys.LEFT:
           context.gotToMainMenuItem(parseInt(this.dataset.parentmenuidx) - 1);
+          prevdef = true;
           break;
 
         case context.keys.UP:
           if (subMenuLinks) {
             context.gotToSubMenuItem(subMenuLinks, subMenuLinks.length - 1);
+            prevdef = true;
           }
           break;
 
         case context.keys.DOWN:
           if (subMenuLinks) {
             context.gotToSubMenuItem(subMenuLinks, 0);
+            prevdef = true;
           }
           break;
 
         case context.keys.HOME:
           context.gotToMainMenuItem(0);
+          prevdef = true;
           break;
 
         case context.keys.END:
           context.gotToMainMenuItem(context.parentMenuList.length - 1);
+          prevdef = true;
           break;
 
         default:
           break;
       }
+
+      if (prevdef) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+
     });
   });
 
   // Sub menu events
-  Array.prototype.forEach.call(context.subMenuList, (subMenuItem, i) => {
+  Array.prototype.forEach.call(context.subMenuList, subMenuItem => {
+    
+    // Click event - Block default behavior if link has sub menu
+    subMenuItem.addEventListener("click", function (event) {
+      if (this.hasAttribute('aria-haspopup')) {
+        event.preventDefault();
+      }
+    });
+
+    // Focus event
     subMenuItem.addEventListener("focus", function (event) {
       let linkElement = this;
 
@@ -292,7 +321,7 @@ A11yMegaMenu.prototype.eventHandlers = function () {
 
     // Key press event
     subMenuItem.addEventListener("keydown", function (event) {
-      let siblings = [];
+      let prevdef = false, siblings = [];
 
       for (let i = 0; i < this.closest("ul").children.length; i++) {
         let subMenuAnchor = this.closest("ul").children[i].querySelector(
@@ -328,6 +357,7 @@ A11yMegaMenu.prototype.eventHandlers = function () {
           } else {
             this.closest("ul").previousElementSibling.focus();
           }
+          prevdef = true;
           break;
 
         case context.keys.UP:
@@ -339,6 +369,7 @@ A11yMegaMenu.prototype.eventHandlers = function () {
               parseInt(this.dataset.submenuindex) - 1
             );
           }
+          prevdef = true;
           break;
 
         case context.keys.DOWN:
@@ -350,14 +381,17 @@ A11yMegaMenu.prototype.eventHandlers = function () {
               parseInt(this.dataset.submenuindex) + 1
             );
           }
+          prevdef = true;
           break;
 
         case context.keys.HOME:
           context.gotToSubMenuItem(siblings, 0);
+          prevdef = true;
           break;
 
         case context.keys.END:
           context.gotToSubMenuItem(siblings, siblings.length - 1);
+          prevdef = true;
           break;
 
         case context.keys.ESC:
@@ -366,11 +400,18 @@ A11yMegaMenu.prototype.eventHandlers = function () {
           } else {
             this.offsetParent.previousElementSibling.focus();
           }
+          prevdef = true;
           break;
 
         default:
           break;
       }
+
+      if (prevdef) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+
     });
   });
 };
